@@ -1,0 +1,87 @@
+{
+  "name": "@amplifiui/mobile",
+  "version": "0.0.89",
+  "description": "Tailwind based react native package",
+  "main": "./lib/cjs/index.js",
+  "module": "./lib/esm/index.js",
+  "react-native": "./src/index.tsx",
+  "types": "./lib/esm/index.d.ts",
+  "files": [
+    "/lib",
+    "/src"
+  ],
+  "scripts": {
+    "build": "yarn build:esm && yarn build:cjs",
+    "build:esm": "tsc",
+    "build:cjs": "tsc --module commonjs --outDir lib/cjs"
+  },
+  "keywords": [
+    "react-native",
+    "tailwind",
+    "rn",
+    "twrnc"
+  ],
+  "author": "Amplifi Labs",
+  "license": "MIT",
+  "peerDependencies": {
+    "react": "*",
+    "react-native": ">=0.64.0",
+    "react-native-svg": ">=12.3.0",
+    "twrnc": ">=3.3.0",
+    "react-native-safe-area-context": ">=4.2.5"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.9",
+    "@babel/runtime": "^7.12.5",
+    "@react-native-community/eslint-config": "^2.0.0",
+    "@types/jest": "^26.0.23",
+    "@types/react": "17.0.30",
+    "@types/react-native": "0.66.18",
+    "@types/react-test-renderer": "^17.0.1",
+    "@typescript-eslint/eslint-plugin": "^5.7.0",
+    "@typescript-eslint/parser": "^5.7.0",
+    "babel-jest": "^26.6.3",
+    "eslint": "^8.9.0",
+    "eslint-config-prettier": "^8.4.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-promise": "^6.0.0",
+    "eslint-plugin-react": "^7.28.0",
+    "jest": "^26.6.3",
+    "metro-react-native-babel-preset": "^0.66.2",
+    "npm-force-resolutions": "^0.0.10",
+    "react": "17.0.2",
+    "react-native": "0.67.4",
+    "react-native-safe-area-context": "^4.2.5",
+    "react-native-svg": "12.3.0",
+    "react-test-renderer": "17.0.2",
+    "twrnc": "3.3.0",
+    "typescript": "^4.4.4"
+  },
+  "resolutions": {
+    "@types/react": "17.0.30"
+  },
+  "jest": {
+    "preset": "react-native",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Amplifi-Labs/amplifiui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Amplifi-Labs/amplifiui/issues"
+  },
+  "homepage": "https://github.com/Amplifi-Labs/amplifiui#readme",
+  "dependencies": {}
+}

@@ -1,0 +1,12 @@
+amplifiui-mobile/node_modules
+
+package
+.cache
+.DS_STORE
+
+lib
+
+yarn.lock
+amplifiui-mobile/yarn.lock
+
+amplifiui-mobile/package-lock.json
