@@ -1,4 +1,4 @@
-# Start
+# Amplifi UI
 
 ## Tailwind based React Native components
 
