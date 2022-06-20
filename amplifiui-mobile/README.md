@@ -2,7 +2,7 @@
 
 ## Tailwind based React Native components
 
-<img src="https://raw.githubusercontent.com/Amplifi-Labs/amplifiui/master/amplifiui-components/files/Amplifi-Labs-Logo.png" alt="Amplifi UI Logo" width=200  />
+<img src="https://raw.githubusercontent.com/Amplifi-Labs/amplifiui/main/amplifiui-mobile/files/Amplifi-Labs-Logo.png" alt="Amplifi UI Logo" width=200  />
 
 This library is still on initial phase of development. Feel free to use it, but be aware that structural changes are still possible. If you want to use it, please, lock the imported version on your package.json file.
 
@@ -413,4 +413,4 @@ export default function App() {
 
 This library is being developed by Amplifi Labs. To know more about our company, please, access our [website](https://www.amplifilabs.com).
 
-![Amplifi Labs Logo](https://raw.githubusercontent.com/Amplifi-Labs/startui/master/startui-components/files/Amplifi-Labs-Logo.png)
+<img src="https://raw.githubusercontent.com/Amplifi-Labs/amplifiui/main/amplifiui-mobile/files/Amplifi-Labs-Logo.png" alt="Amplifi UI Logo" width=200  />
