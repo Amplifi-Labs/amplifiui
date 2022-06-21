@@ -1,10 +1,11 @@
 import * as React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
-import { Style } from 'twrnc/dist/esm/types';
+import { Style, TailwindFn } from 'twrnc/dist/esm/types';
 
 import { SvgXml } from 'react-native-svg';
-import { TailwindFn } from 'twrnc';
 import Spinner from '../Spinner';
+
+import DefaultLoadingIcon from './LoadingIcon';
 
 type Props = {
   tw: TailwindFn;
@@ -29,7 +30,7 @@ const Button = ({
   type,
   iconLeft,
   iconRight,
-  loadingIcon,
+  loadingIcon = DefaultLoadingIcon,
   loadingStyle,
   isLoading = false,
 }: Props): JSX.Element => {
@@ -42,7 +43,7 @@ const Button = ({
 
   const defaultTextStyles = tw.style('text-lg font-medium text-white');
 
-  const loadingDefaultStyles = tw.style('');
+  const loadingDefaultStyles = tw.style('ml-4');
 
   return (
     <TouchableOpacity style={{...defaultStyles, ...style}} onPress={onPress}>
