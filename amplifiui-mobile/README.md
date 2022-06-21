@@ -37,14 +37,14 @@ This component creates a View with an image as background. Accepts jpeg and png 
 
 #### Samples
 Try using Expo:
-https://snack.expo.dev/@paulorieck/amplifiui---backgroundimage?platform=ios
+https://snack.expo.dev/@paulorieck/amplifi-ui---mobile---backgroundimage?platform=ios
 
 ```
 import * as React from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import { Card, Button, H2, BackgroundImage } from '@amplifiui/mobile';
 
-import Background from './assets/pexels-max-ravier-5589102.jpg';
+import Background from './assets/pexels-tieu-linh-11635802.jpg';
 
 import tw from './services/tw';
 
@@ -86,12 +86,12 @@ This is a clickable component and can execute functions passed as an argument (o
 
 #### Samples
 Try using Expo:
-https://snack.expo.dev/@paulorieck/amplifiui-mobile---button?platform=ios
+https://snack.expo.dev/@paulorieck/amplifi-ui---mobile---button?platform=ios
 
 ```
 import * as React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
-import { Card, Button, H2 } from 'startui';
+import { Text, SafeAreaView, StyleSheet, ScrollView } from 'react-native';
+import { Card, Button, H2 } from '@amplifiui/mobile';
 
 import RightIcon from './icons/arrow-right-white';
 
@@ -99,35 +99,49 @@ import tw from './services/tw';
 
 export default function App() {
   return (
-    <View style={tw`p-2 mt-10`}>
-      <Card tw={tw} style={tw`bg-gray-100 mb-4`}>
-        <H2 tw={tw} style={tw`pb-2`}>Button Vanilla</H2>
-        <Button tw={tw} onPress={() => console.log('You clicked on me!')}>Click Me</Button>
-      </Card>
-      <Card tw={tw} style={tw`bg-gray-100 mb-4`}>
-        <H2 tw={tw} style={tw`pb-2`}>Button Primary</H2>
-        <Button tw={tw} type="primary" onPress={() => console.log('You clicked on me!')}>Click Me</Button>
-      </Card>
-      <Card tw={tw} style={tw`bg-gray-100 mb-4`}>
-        <H2 tw={tw} style={tw`pb-2`}>Button Secondary</H2>
-        <Button tw={tw} type="secondary" onPress={() => console.log('You clicked on me!')}>Click Me</Button>
-      </Card>
-      <Card tw={tw} style={tw`bg-gray-100 mb-4`}>
-        <H2 tw={tw} style={tw`pb-2`}>Button With Icon on The Right</H2>
-        <Button tw={tw} onPress={() => console.log('You clicked on me!')} iconRight={RightIcon}>Click Me</Button>
-      </Card>
-      <Card tw={tw} style={tw`bg-gray-100 mb-4`}>
-        <H2 tw={tw} style={tw`pb-2`}>Button With Customized TailwindCSS</H2>
-        <Button
-          tw={tw}
-          onPress={() => console.log('You clicked on me!')}
-          style={tw`bg-green-700 rounded-full`}
-          textStyle={tw`text-gray-100 font-bold text-2xl`}
-        >
-          Click Me
-        </Button>
-      </Card>
-    </View>
+    <SafeAreaView>
+      <ScrollView style={tw`p-2 mt-10`}>
+        <Card tw={tw} style={tw`bg-gray-100 mb-4`}>
+          <H2 tw={tw} style={tw`pb-2`}>Button Vanilla</H2>
+          <Button tw={tw} onPress={() => console.log('You clicked on me!')}>Click Me</Button>
+        </Card>
+        <Card tw={tw} style={tw`bg-gray-100 mb-4`}>
+          <H2 tw={tw} style={tw`pb-2`}>Button Primary</H2>
+          <Button tw={tw} type="primary" onPress={() => console.log('You clicked on me!')}>Click Me</Button>
+        </Card>
+        <Card tw={tw} style={tw`bg-gray-100 mb-4`}>
+          <H2 tw={tw} style={tw`pb-2`}>Button Secondary</H2>
+          <Button tw={tw} type="secondary" onPress={() => console.log('You clicked on me!')}>Click Me</Button>
+        </Card>
+        <Card tw={tw} style={tw`bg-gray-100 mb-4`}>
+          <H2 tw={tw} style={tw`pb-2`}>Button With Icon on The Right</H2>
+          <Button tw={tw} onPress={() => console.log('You clicked on me!')} iconRight={RightIcon}>Click Me</Button>
+        </Card>
+        <Card tw={tw} style={tw`bg-gray-100 mb-4`}>
+          <H2 tw={tw} style={tw`pb-2`}>Button With Customized TailwindCSS</H2>
+          <Button
+            tw={tw}
+            onPress={() => console.log('You clicked on me!')}
+            style={tw`bg-green-700 rounded-full`}
+            textStyle={tw`text-gray-100 font-bold text-2xl`}
+          >
+            Click Me
+          </Button>
+        </Card>
+        <Card tw={tw} style={tw`bg-gray-100 mb-4`}>
+          <H2 tw={tw} style={tw`pb-2`}>Button with Loading Indicator</H2>
+          <Button
+            tw={tw}
+            onPress={() => console.log('You clicked on me!')}
+            style={tw`bg-orange-700`}
+            textStyle={tw`text-gray-100`}
+            isLoading={true}
+          >
+            Click Me
+          </Button>
+        </Card>
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 ```
@@ -155,14 +169,14 @@ This is a div that has a shadow around it and rounded corners.
 
 #### Samples
 Try using Expo:
-https://snack.expo.dev/@paulorieck/startui---card?platform=ios
+https://snack.expo.dev/@paulorieck/amplifi-ui---mobile---card?platform=ios
 
 ```
 import * as React from 'react';
 import { Text, View, StyleSheet } from 'react-native';
-import { Card, Button, H2, BackgroundImage, Paragraph } from 'startui';
+import { Card, Button, H2, BackgroundImage, Paragraph } from '@amplifiui/mobile';
 
-import Background from './assets/pexels-max-ravier-5589102.jpg';
+import Background from './assets/pexels-tieu-linh-11635802.jpg';
 
 import tw from './services/tw';
 
@@ -210,13 +224,12 @@ This component renders vertical bars charts
 
 #### Samples
 Try using Expo:
-https://snack.expo.dev/@paulorieck/startui---charts---vertical-bars?platform=ios
+https://snack.expo.dev/@paulorieck/amplifi-ui---mobile---charts---vertical-bars?platform=ios
 
 ```
 import * as React from 'react';
 import { Text, View, StyleSheet, Dimensions } from 'react-native';
-import { Card, Button, H2, VerticalBars } from 'startui';
-import {Data as VerticalBarsData} from 'startui/lib/esm/components/Charts/VerticalBars';
+import { Card, Button, H2, VerticalBars } from '@amplifiui/mobile';
 
 import tw from './services/tw';
 
@@ -243,7 +256,7 @@ const chartData = {
       'Returns / Refunds': {amount: 60000, transactions: 50},
     }, // 250k
   },
-} as VerticalBarsData;
+};
 
 const windowWidth = Dimensions.get('window').width;
 
