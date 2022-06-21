@@ -146,7 +146,7 @@ export default function App() {
 }
 ```
 
-<img src="https://raw.githubusercontent.com/Amplifi-Labs/startui/master/startui-components/files/sample-buttons.png" alt="Buttons Image Sample" width=200  />
+<img src="https://raw.githubusercontent.com/Amplifi-Labs/amplifiui/master/amplifiui-mobile/files/sample-buttons.png" alt="Buttons Image Sample" width=200  />
 
 #### Props:
 
@@ -205,7 +205,7 @@ export default function App() {
 }
 ```
 
-<img src="https://raw.githubusercontent.com/Amplifi-Labs/startui/master/startui-components/files/sample-cards.png" alt="Card Sample Image" width=200  />
+<img src="https://raw.githubusercontent.com/Amplifi-Labs/amplifiui/master/amplifiui-mobile/files/sample-cards.png" alt="Card Sample Image" width=200  />
 
 ### Props:
 
@@ -282,7 +282,7 @@ export default function App() {
 }
 ```
 
-<img src="https://raw.githubusercontent.com/Amplifi-Labs/startui/master/startui-components/files/sample-charts-vertical-bars.png" alt="Card Sample Image" width=200  />
+<img src="https://raw.githubusercontent.com/Amplifi-Labs/amplifiui/master/amplifiui-mobile/files/sample-charts-vertical-bars.png" alt="Card Sample Image" width=200  />
 
 #### Props
 
