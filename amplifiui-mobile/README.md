@@ -40,62 +40,11 @@ If your project uses Amplifi UI, please, let us know! We would love :heart: to h
 | [Forms - Password Input](/readmes/input-password.md) | This component is a subset of the InputText created specifically to process passwords.                                          | [Snack](https://snack.expo.dev/@paulorieck/amplifi-ui---forms--input-password?platform=ios)           |
 | [Forms - Text Input](/readmes/input-text.md)         | This component was designed specifically to receive strings.                                                                    | [Snack](https://snack.expo.dev/@paulorieck/amplifi-ui---forms--input-text?platform=ios)               |
 | [Typography](/readmes/typography.md)                 | A group of components to render text on the screen.                                                                             | [Snack](https://snack.expo.dev/@paulorieck/amplifi-ui---text-typography?platform=ios)                 |
-
-## HR
-
-#### Description:
-
-#### Samples
-
-#### Props
-
-## Image
-
-#### Description:
-
-#### Samples
-
-#### Props
-
-## Info
-
-#### Description:
-
-#### Samples
-
-#### Props
-
-## LoadingRound
-
-#### Description:
-
-#### Samples
-
-#### Props
-
-## ProgressSteps
-
-#### Description:
-
-#### Samples
-
-#### Props
-
-## Spinner
-
-#### Description:
-
-#### Samples
-
-#### Props
-
-## SwipeCarousel
-
-#### Description:
-
-#### Samples
-
-#### Props
+| [HR](/readmes/hr.md)                                 |                                                                                                                                 |                                                                                                       |
+| [Rounded Loading](/readmes/loading-round.md)         |                                                                                                                                 |                                                                                                       |
+| [Progress Steps](/readmes/progress-steps.md)         |                                                                                                                                 |                                                                                                       |
+| [Spinner](/readmes/spinner.md)                       |                                                                                                                                 |                                                                                                       |
+| [Swipe Carousel](/readmes/swipe-carousel.md)         |                                                                                                                                 |                                                                                                       |
 
 ### Amplifi Labs
 
