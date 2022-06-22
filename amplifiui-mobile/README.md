@@ -362,6 +362,8 @@ export default function App() {
 }
 ```
 
+<img src="https://raw.githubusercontent.com/Amplifi-Labs/amplifiui/main/amplifiui-mobile/files/sample-collapsible-modal.gif" alt="Card Sample Image" width=200  />
+
 #### Props
 | Variable         | Value Type                  | Default | Mandatory          | Notes                                                                      |
 | ---------------- | --------------------------- | ------- | ------------------ | -------------------------------------------------------------------------- |
