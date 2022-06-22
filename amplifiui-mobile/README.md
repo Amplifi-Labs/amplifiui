@@ -458,13 +458,6 @@ export default function App() {
 | errorStyle       | Tailwind Style               | \_      | :x:                | This style is applied specifically to the error text.                          |
 | keyboardType     | RN KeyboardTypeOptions       | \_      | :x:                | Defines the type of keyboards that will be presented to the user.              |
 | onBlur           | NativeSyntheticEvent         | \_      | :x:                | Detects when the user leaves the input field. Used in combination with Formik. |
-### InputNumber
-
-#### Description:
-
-#### Samples
-
-#### Props
 
 ### InputPassword
 
