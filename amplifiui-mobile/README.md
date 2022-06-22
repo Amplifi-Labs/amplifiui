@@ -770,8 +770,84 @@ export default function App() {
 This component makes it possible to render SVGs, JPEGs and PNGs on mobile.
 
 #### Samples
+Try using Expo:
+https://snack.expo.dev/@paulorieck/amplifi-ui---mobile---image?platform=ios
+
+```
+import * as React from 'react';
+import { View, SafeAreaView, ScrollView } from 'react-native';
+import { Card, Paragraph, Image } from '@amplifiui/mobile';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+
+import tw from './services/tw';
+
+import SVGSample from './assets/svg';
+import JPEGSample from './assets/pexels-william-larsen-11515591.jpg';
+import PNGSample from './assets/2cd43b_eafff063f69f4ea8b65b3ae32ca62cb8_mv2.png';
+
+export default function App() {
+  return (
+    <SafeAreaView style={tw`bg-gray-200 flex-1`}>
+      <ScrollView>
+        <View style={tw`m-4`}>
+          <Card tw={tw} style={tw`mt-4 shadow`}>
+            <Paragraph tw={tw}>
+              Let's display a SVG!
+            </Paragraph>
+            <View style={tw`flex-row justify-center my-6`}>
+              <Image
+                tw={tw}
+                svg={SVGSample}
+                width={100}
+                height={100}
+                style={tw`h-25`}
+              />
+            </View>
+          </Card>
+          <Card tw={tw} style={tw`mt-4 shadow`}>
+            <Paragraph tw={tw}>
+              Now, this is a JPEG
+            </Paragraph>
+            <View style={tw`flex-row justify-center my-6`}>
+              <Image
+                tw={tw}
+                src={JPEGSample}
+                width={200}
+                height={200}
+              />
+            </View>
+          </Card>
+          <Card tw={tw} style={tw`mt-4 shadow`}>
+            <Paragraph tw={tw}>
+              Now, this is a PNG
+            </Paragraph>
+            <View style={tw`flex-row justify-center my-6`}>
+              <Image
+                tw={tw}
+                src={PNGSample}
+                width={70}
+                height={200}
+              />
+            </View>
+          </Card>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
+  );
+}
+```
+
+<img src="https://raw.githubusercontent.com/Amplifi-Labs/amplifiui/main/amplifiui-mobile/files/sample-images.png" alt="Images Samples" width=200  />
 
 #### Props
+| Variable         | Value Type                   | Default | Mandatory          | Notes                                                                          |
+| ---------------- | ---------------------------- | ------- | ------------------ | ------------------------------------------------------------------------------ |
+| tw               | Tailwind Function            | \_      | :heavy_check_mark: | \_                                                                             |
+| style            | Tailwind Style               | \_      | :x:                | This style is applied to the container View                                    |
+| svg              | SVG String                   | \_      | :x:                | When it's a SVG image, this prop needs to be informed.                         |
+| src              | ImageSourcePropType          | \_      | :x:                | When it's a JPEG or PNG image, this prop needs to be informed.                 |
+| width            | number                       | \_      | :x:                | The width of the image                                                         |
+| height           | number                       | \_      | :x:                | The height of the image                                                         |
 
 ## LoadingRound
 
