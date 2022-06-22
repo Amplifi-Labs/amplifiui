@@ -150,16 +150,19 @@ export default function App() {
 
 #### Props:
 
-| Variable  | Value Type               | Default | Mandatory          | Notes                                                                      |
-| --------- | ------------------------ | ------- | ------------------ | -------------------------------------------------------------------------- |
-| tw        | Tailwind Function        | \_      | :heavy_check_mark: | \_                                                                         |
-| style     | Tailwind Style           | \_      | :x:                | This style is applied to the container View                                |
-| textStyle | Tailwind Style           | \_      | :x:                | This style is applied directly to the Text component                       |
-| children  | String                   | \_      | :x:                | The children props are limited to strings.                                 |
-| type      | 'primary' OR 'secondary' | \_      | :x:                | If defined applies the default primary or secondary colors as button color |
-| onPress   | () => void               | \_      | :heavy_check_mark: | Defines the function that will be executed when button pressed.            |
-| iconLeft  | SVG string               | \_      | :x:                | If defined will add an icon to the left of the text.                       |
-| iconRight | SVG string               | \_      | :x:                | If defined will add an icon to the right of the text.                      |
+| Variable     | Value Type               | Default | Mandatory          | Notes                                                                      |
+| ------------ | ------------------------ | ------- | ------------------ | -------------------------------------------------------------------------- |
+| tw           | Tailwind Function        | \_      | :heavy_check_mark: | \_                                                                         |
+| style        | Tailwind Style           | \_      | :x:                | This style is applied to the container View                                |
+| textStyle    | Tailwind Style           | \_      | :x:                | This style is applied directly to the Text component                       |
+| children     | String                   | \_      | :x:                | The children props are limited to strings.                                 |
+| type         | 'primary' OR 'secondary' | \_      | :x:                | If defined applies the default primary or secondary colors as button color |
+| onPress      | () => void               | \_      | :heavy_check_mark: | Defines the function that will be executed when button pressed.            |
+| iconLeft     | SVG string               | \_      | :x:                | If defined will add an icon to the left of the text.                       |
+| iconRight    | SVG string               | \_      | :x:                | If defined will add an icon to the right of the text.                      |
+| loadingIcon  | SVG string               | \_      | :x:                | Has a default icon, if defined replaces this default icon                  |
+| loadingStyle | Tailwind Style           | \_      | :x:                | \_                                                                         |
+| isLoading    | boolean                  | false   | :x:                | \_                                                                         |
 
 ## Card
 
