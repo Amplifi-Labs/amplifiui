@@ -1,6 +1,6 @@
 {
   "name": "@amplifiui/mobile",
-  "version": "0.0.108",
+  "version": "0.0.109",
   "description": "Tailwind based react native package",
   "main": "./lib/cjs/index.js",
   "module": "./lib/esm/index.js",

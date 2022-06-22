@@ -712,10 +712,56 @@ For ALL of the text components:
 ## HR
 
 #### Description:
+This component implements a Horizontal Rule.
 
 #### Samples
+Try using Expo:
+https://snack.expo.dev/@paulorieck/amplifi-ui---mobile---hr?platform=ios
+
+```
+import * as React from 'react';
+import { View, SafeAreaView } from 'react-native';
+import { Card, HR, Paragraph } from '@amplifiui/mobile';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+
+import tw from './services/tw';
+
+export default function App() {
+  return (
+    <SafeAreaView style={tw`bg-gray-200 flex-1`}>
+      <View style={tw`m-4`}>
+        <Card tw={tw} style={tw`mt-4 shadow`}>
+          <Paragraph tw={tw}>
+            Do you want a horizontal rule, please use the following component!
+          </Paragraph>
+          <HR tw={tw} style={tw`my-4`} />
+          <Paragraph tw={tw}>
+            And as you can see, you have a horizontal rule!
+          </Paragraph>
+        </Card>
+        <Card tw={tw} style={tw`mt-4 shadow`}>
+          <Paragraph tw={tw}>
+            Now if you want a HR with different a different color ...
+          </Paragraph>
+          <HR tw={tw} style={tw`my-4`} color="blue-400" />
+          <Paragraph tw={tw}>
+            ... this is how you get one!
+          </Paragraph>
+        </Card>
+      </View>
+    </SafeAreaView>
+  );
+}
+```
+
+<img src="https://raw.githubusercontent.com/Amplifi-Labs/amplifiui/main/amplifiui-mobile/files/sample-hr.png" alt="Horizontal Rule Sample Image" width=200  />
 
 #### Props
+| Variable         | Value Type                   | Default | Mandatory          | Notes                                                                          |
+| ---------------- | ---------------------------- | ------- | ------------------ | ------------------------------------------------------------------------------ |
+| tw               | Tailwind Function            | \_      | :heavy_check_mark: | \_                                                                             |
+| color            | Tailwind Color               | black   | :x:                | Tailwind Color, i.e. blue-400                                                  |
+| style            | Tailwind Style               | \_      | :x:                | This style is applied to the container View                                    |
 
 ## Image
 
