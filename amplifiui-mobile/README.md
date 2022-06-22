@@ -462,6 +462,7 @@ export default function App() {
 ### InputPassword
 
 #### Description:
+This component is a subset of the InputText created specifically to process passwords.
 
 #### Samples
 Try using Expo:
@@ -532,8 +533,8 @@ export default function App() {
 | inputStyle       | Tailwind Style               | \_      | :x:                | This style is applied specifically to the input.                               |
 | textInputStyle   | Tailwind Style               | \_      | :x:                | This style is applied specifically to the input text.                          |
 | helperStyle      | Tailwind Style               | \_      | :x:                | This style is applied specifically to the helper text.                         |
-| invisibleIcon    | Valid SVG string             | \_      | :x:                | This icon is displayed when the password is invisible.                         |
-| visibleIcon      | Valid SVG string             | \_      | :x:                | This icon is displayed when the password is visible.                           |
+| invisibleIcon    | Valid SVG string             | \_      | :heavy_check_mark: | This icon is displayed when the password is invisible.                         |
+| visibleIcon      | Valid SVG string             | \_      | :heavy_check_mark: | This icon is displayed when the password is visible.                           |
 | iconStyle        | Tailwind Style               | \_      | :x:                | This style is applied specifically to the icons.                               |
 | onChangeText     | (value: string) => void      | \_      | :heavy_check_mark: | Callback when the text changes.                                                |
 | value            | string                       | \_      | :heavy_check_mark: | Value for the input field.                                                     |
