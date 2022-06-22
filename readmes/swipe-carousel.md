@@ -1,7 +1,0 @@
-## SwipeCarousel
-
-#### Description:
-
-#### Samples
-
-#### Props

@@ -1,7 +1,0 @@
-## LoadingRound
-
-#### Description:
-
-#### Samples
-
-#### Props

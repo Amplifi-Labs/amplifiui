@@ -1,7 +1,0 @@
-## ProgressSteps
-
-#### Description:
-
-#### Samples
-
-#### Props

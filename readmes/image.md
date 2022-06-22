@@ -1,7 +1,0 @@
-## Image
-
-#### Description:
-
-#### Samples
-
-#### Props

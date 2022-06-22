@@ -1,7 +1,0 @@
-## HR
-
-#### Description:
-
-#### Samples
-
-#### Props

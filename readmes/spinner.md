@@ -1,7 +1,0 @@
-## Spinner
-
-#### Description:
-
-#### Samples
-
-#### Props
