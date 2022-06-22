@@ -15,6 +15,7 @@ Key concepts of this library:
 - Simplifies hard tasks like, adding animations, easier;
 - Tailwind CSS is doing great on the Web apps, we want to make the process of using Tailwind on the mobile as easy as on the web;
 - Focus on reusability and flexibility;
+- Heavily depends on SVGs;
 
 If your project uses Amplifi UI, please, let us know! We would love :heart: to have this information!
 
@@ -766,6 +767,7 @@ export default function App() {
 ## Image
 
 #### Description:
+This component makes it possible to render SVGs, JPEGs and PNGs on mobile.
 
 #### Samples
 
@@ -782,10 +784,45 @@ export default function App() {
 ## ProgressSteps
 
 #### Description:
+This component shows progress.
 
 #### Samples
+Try using Expo:
+https://snack.expo.dev/@paulorieck/amplifi-ui---mobile---progress-indicator?platform=ios
+
+```
+import * as React from 'react';
+import { View, SafeAreaView } from 'react-native';
+import { Card, Paragraph, Image, ProgressSteps, H3 } from '@amplifiui/mobile';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+
+import tw from './services/tw';
+
+export default function App() {
+  return (
+    <SafeAreaView style={tw`bg-gray-200 flex-1`}>
+      <View style={tw`m-4`}>
+        <Card tw={tw}>
+          <H3 tw={tw} style={tw`mb-4`}>
+            This is a Progress Inficator
+          </H3>
+          <ProgressSteps tw={tw} steps={4} current={2} />
+        </Card>
+      </View>
+    </SafeAreaView>
+  );
+}
+```
+
+<img src="https://raw.githubusercontent.com/Amplifi-Labs/amplifiui/main/amplifiui-mobile/files/sample-progressindicator.png" alt="Horizontal Rule Sample Image" width=200  />
 
 #### Props
+| Variable         | Value Type                   | Default | Mandatory          | Notes                                                                          |
+| ---------------- | ---------------------------- | ------- | ------------------ | ------------------------------------------------------------------------------ |
+| tw               | Tailwind Function            | \_      | :heavy_check_mark: | \_                                                                             |
+| style            | Tailwind Style               | \_      | :x:                | This style is applied to the container View                                    |
+| steps            | number                       | \_      | :heavy_check_mark: | The number of steps on the progress indicator                                  |
+| current          | number                       | \_      | :heavy_check_mark: | The current step of the indicator.                                             |
 
 ## Spinner
 
