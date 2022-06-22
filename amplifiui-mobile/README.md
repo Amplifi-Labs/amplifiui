@@ -365,13 +365,13 @@ export default function App() {
 <img src="https://raw.githubusercontent.com/Amplifi-Labs/amplifiui/main/amplifiui-mobile/files/sample-collapsible-modal.gif" alt="Card Sample Image" width=200  />
 
 #### Props
-| Variable         | Value Type                  | Default | Mandatory          | Notes                                                                      |
-| ---------------- | --------------------------- | ------- | ------------------ | -------------------------------------------------------------------------- |
-| tw               | Tailwind Function           | \_      | :heavy_check_mark: | \_                                                                         |
-| children         | JSX.Element | JSX.Element[] | \_      | :x:                | The children props are limited to strings.                                 |
-| maxHeight        | maxHeight                   | \_      | :heavy_check_mark: | This is mandatory and determines the height of the modal.                  |
-| show             | boolean                     | \_      | :heavy_check_mark: | If true shows the modal.                                                   |
-| setShow          | () => void                  | \_      | :heavy_check_mark: | This is the callback to update the modal state (opened/closed)             |
+| Variable         | Value Type                   | Default | Mandatory          | Notes                                                                      |
+| ---------------- | ---------------------------- | ------- | ------------------ | -------------------------------------------------------------------------- |
+| tw               | Tailwind Function            | \_      | :heavy_check_mark: | \_                                                                         |
+| children         | JSX.Element \| JSX.Element[] | \_      | :x:                | The children props are limited to strings.                                 |
+| maxHeight        | maxHeight                    | \_      | :heavy_check_mark: | This is mandatory and determines the height of the modal.                  |
+| show             | boolean                      | \_      | :heavy_check_mark: | If true shows the modal.                                                   |
+| setShow          | () => void                   | \_      | :heavy_check_mark: | This is the callback to update the modal state (opened/closed)             |
 
 ## Forms
 
