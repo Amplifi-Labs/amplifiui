@@ -869,20 +869,66 @@ https://snack.expo.dev/@paulorieck/amplifi-ui---mobile---progress-indicator?plat
 ```
 import * as React from 'react';
 import { View, SafeAreaView } from 'react-native';
-import { Card, Paragraph, Image, ProgressSteps, H3 } from '@amplifiui/mobile';
+import { Card, Paragraph, Image, ProgressSteps, H3, Button } from '@amplifiui/mobile';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import tw from './services/tw';
 
 export default function App() {
+  const [card1Indicator, setCard1Indicator] = React.useState(1);
+  const [card2Indicator, setCard2Indicator] = React.useState(1);
+
   return (
     <SafeAreaView style={tw`bg-gray-200 flex-1`}>
       <View style={tw`m-4`}>
-        <Card tw={tw}>
+        <Card tw={tw} style={tw`mb-4`}>
           <H3 tw={tw} style={tw`mb-4`}>
-            This is a Progress Inficator
+            This is a Vanilla Progress Indicator
           </H3>
-          <ProgressSteps tw={tw} steps={4} current={2} />
+          <ProgressSteps tw={tw} steps={4} current={card1Indicator} />
+          <View style={tw`flex-row justify-around m-4`}>
+            <Button
+              tw={tw}
+              style={tw`flex-1 mr-2`}
+              onPress={() => setCard1Indicator(card1Indicator-1 < 0 ? 3 : card1Indicator-1)}>
+              Prev
+            </Button>
+            <Button
+              tw={tw}
+              style={tw`flex-1 ml-2`}
+              onPress={() => setCard1Indicator(card1Indicator+1 > 3 ? 0 : card1Indicator+1)}>
+              Next
+            </Button>
+          </View>
+        </Card>
+        <Card tw={tw} style={tw`mb-4`}>
+          <H3 tw={tw} style={tw`mb-4`}>
+            This is a custom Progress Indicator
+          </H3>
+          <ProgressSteps
+            tw={tw}
+            steps={4}
+            current={2}
+            space={4}
+            width={32}
+            unselectedWidth={12}
+            selectedColor="#408E5A"
+            unselectedColor="#D6D6D6"
+          />
+          <View style={tw`flex-row justify-around m-4`}>
+            <Button
+              tw={tw}
+              style={tw`flex-1 mr-2`}
+              onPress={() => setCard2Indicator(card2Indicator-1 < 0 ? 3 : card2Indicator-1)}>
+              Prev
+            </Button>
+            <Button
+              tw={tw}
+              style={tw`flex-1 ml-2`}
+              onPress={() => setCard1Indicator(card2Indicator+1 > 3 ? 0 : card2Indicator+1)}>
+              Next
+            </Button>
+          </View>
         </Card>
       </View>
     </SafeAreaView>
