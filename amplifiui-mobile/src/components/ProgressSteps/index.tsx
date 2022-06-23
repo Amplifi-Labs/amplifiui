@@ -14,6 +14,7 @@ type Props = {
   width?: number;
   diameter?: number;
   color?: string;
+  unselectedColor?: string;
   opacity?: number;
   radius?: number;
   unselectedWidth?: number;
@@ -31,6 +32,7 @@ const ProgressSteps = ({
   opacity = 0.3,
   radius = 2,
   unselectedWidth = 4,
+  unselectedColor = "#6B7280",
 }: Props): JSX.Element => {
   const defaultStyles = tw`h-1`;
 
@@ -51,7 +53,7 @@ const ProgressSteps = ({
         str += `<rect x="${x}" width="${width}" height="${diameter}" rx="${radius}" fill="${color}"/>`;
         x += space + width;
       } else {
-        str += `<rect opacity="${opacity}" x="${x}" width="${unselectedWidth}" height="${diameter}" rx="${radius}" fill="${color}"/>`;
+        str += `<rect opacity="${opacity}" x="${x}" width="${unselectedWidth}" height="${diameter}" rx="${radius}" fill="${unselectedColor}"/>`;
         x += space + diameter;
       }
     }

@@ -902,7 +902,8 @@ export default function App() {
 | space            | number                       | 3       | :x:                | Defines the space between indicators.                                          |
 | width            | number                       | 17      | :x:                | Defines the width for the selected indicator.                                  |
 | diameter         | number                       | 4       | :x:                | Defines the diameter of the unselected indicator.                              |
-| color            | string                       | #6B7280 | :x:                | Defines the color of the indicator.                                            |
+| selectedColor    | string                       | #6B7280 | :x:                | Defines the color for the selected indicator.                                  |
+| unselectedColor  | string                       | #6B7280 | :x:                | Defines the color for the unselected indicators.                               |
 | opacity          | number                       | 0.3     | :x:                | Defines the opacity for the unselected indicators.                             |
 | radius           | number                       | 2       | :x:                | Defines the round radius of the indicators.                                    |
 | unselectedWidth  | number                       | 4       | :x:                | Defines the length of the unselected indicators.                               |
