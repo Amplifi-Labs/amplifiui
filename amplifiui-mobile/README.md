@@ -899,6 +899,12 @@ export default function App() {
 | style            | Tailwind Style               | \_      | :x:                | This style is applied to the container View                                    |
 | steps            | number                       | \_      | :heavy_check_mark: | The number of steps on the progress indicator                                  |
 | current          | number                       | \_      | :heavy_check_mark: | The current step of the indicator.                                             |
+| space            | number                       | 3       | :x:                | Defines the space between indicators.                                          |
+| width            | number                       | 17      | :x:                | Defines the width for the selected indicator.                                  |
+| diameter         | number                       | 4       | :x:                | Defines the diameter of the unselected indicator.                              |
+| color            | string                       | #6B7280 | :x:                | Defines the color of the indicator.                                            |
+| opacity          | number                       | 0.3     | :x:                | Defines the opacity for the unselected indicators.                             |
+| radius           | number                       | 2       | :x:                | Defines the round radius of the indicators.                                    |
 
 ## Spinner
 
