@@ -847,7 +847,7 @@ export default function App() {
 | svg              | SVG String                   | \_      | :x:                | When it's a SVG image, this prop needs to be informed.                         |
 | src              | ImageSourcePropType          | \_      | :x:                | When it's a JPEG or PNG image, this prop needs to be informed.                 |
 | width            | number                       | \_      | :x:                | The width of the image                                                         |
-| height           | number                       | \_      | :x:                | The height of the image                                                         |
+| height           | number                       | \_      | :x:                | The height of the image                                                        |
 
 ## LoadingRound
 
