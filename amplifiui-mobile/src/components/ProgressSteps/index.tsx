@@ -54,7 +54,7 @@ const ProgressSteps = ({
         x += space + width;
       } else {
         str += `<rect opacity="${opacity}" x="${x}" width="${unselectedWidth}" height="${diameter}" rx="${radius}" fill="${unselectedColor}"/>`;
-        x += space + diameter;
+        x += space + unselectedWidth;
       }
     }
     str += '</svg>';
