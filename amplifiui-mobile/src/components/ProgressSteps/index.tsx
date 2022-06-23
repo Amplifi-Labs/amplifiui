@@ -13,7 +13,7 @@ type Props = {
   space?: number;
   width?: number;
   diameter?: number;
-  color?: string;
+  selectedColor?: string;
   unselectedColor?: string;
   opacity?: number;
   radius?: number;
@@ -28,7 +28,7 @@ const ProgressSteps = ({
   space = 3,
   width = 17,
   diameter = 4,
-  color = "#6B7280",
+  selectedColor = "#6B7280",
   opacity = 0.3,
   radius = 2,
   unselectedWidth = 4,
@@ -50,7 +50,7 @@ const ProgressSteps = ({
 
     for (let i = 0; i < steps; i += 1) {
       if (i === current) {
-        str += `<rect x="${x}" width="${width}" height="${diameter}" rx="${radius}" fill="${color}"/>`;
+        str += `<rect x="${x}" width="${width}" height="${diameter}" rx="${radius}" fill="${selectedColor}"/>`;
         x += space + width;
       } else {
         str += `<rect opacity="${opacity}" x="${x}" width="${unselectedWidth}" height="${diameter}" rx="${radius}" fill="${unselectedColor}"/>`;
