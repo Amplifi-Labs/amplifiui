@@ -905,6 +905,7 @@ export default function App() {
 | color            | string                       | #6B7280 | :x:                | Defines the color of the indicator.                                            |
 | opacity          | number                       | 0.3     | :x:                | Defines the opacity for the unselected indicators.                             |
 | radius           | number                       | 2       | :x:                | Defines the round radius of the indicators.                                    |
+| unselectedWidth  | number                       | 4       | :x:                | Defines the length of the unselected indicators.                               |
 
 ## Spinner
 
