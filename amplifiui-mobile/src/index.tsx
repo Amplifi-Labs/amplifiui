@@ -10,6 +10,7 @@ import Checkbox from './components/Forms/Checkbox';
 import InputNumber from './components/Forms/InputNumber';
 import InputPassword from './components/Forms/InputPassword';
 import InputText from './components/Forms/InputText';
+import Radio from './components/Forms/Radio';
 /* Masks */
 import Masks from './components/Forms/masks/Masks';
 import HR from './components/HR';
@@ -60,4 +61,5 @@ export {
   ToggleButton,
   RadioGroup,
   ToastMessage,
+  Radio,
 };
