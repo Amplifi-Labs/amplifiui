@@ -16,7 +16,7 @@ type Props = {
   inputStyle?: Style;
   iconStyle?: Style;
   helperStyle?: Style;
-  onChangeText: ((text: string) => void);
+  onChangeText: (text: string) => void;
   value: string;
   inputType?: 'primary' | 'secondary';
   helperType?: 'primary' | 'secondary';

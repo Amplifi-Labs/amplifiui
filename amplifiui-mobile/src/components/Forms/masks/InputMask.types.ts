@@ -19,7 +19,7 @@ export interface MaskInputProps extends Omit<TextInputProps, 'onChangeText'> {
   placeholderFillCharacter?: string;
 
   /**
-   * Character to be used on the obfuscated characteres. Defaults to "*"
+   * Character to be used on the obfuscated characters. Defaults to "*"
    */
   obfuscationCharacter?: string;
 

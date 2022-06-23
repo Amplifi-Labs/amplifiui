@@ -44,7 +44,7 @@ const ProgressSteps = ({
   React.useEffect(() => {
     let x = 0;
 
-    const imageWidth_ = (steps - 1) * diameter + width + (space * steps - 1);
+    const imageWidth_ = (steps - 1) * diameter + width + (steps - 1) * unselectedWidth + (space * steps - 1);
 
     let str = `<svg width="${imageWidth_}" height="${diameter}" viewBox="0 0 ${imageWidth_} ${diameter}" fill="none" xmlns="http://www.w3.org/2000/svg">`;
 
