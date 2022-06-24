@@ -11,6 +11,7 @@ type Props = {
   label?: string;
   labelStyle?: Style;
   checkboxStyle?: Style;
+  checkedCheckboxStyle?: Style
   value: boolean;
   onPress: () => void;
   icon?: string;
@@ -24,6 +25,7 @@ const Checkbox = ({
   style,
   labelStyle,
   checkboxStyle,
+  checkedCheckboxStyle,
   value,
   onPress,
   icon = Icon,
@@ -52,7 +54,13 @@ const Checkbox = ({
       }}>
       <TouchableOpacity style={tw`justify-center`} onPress={onPress}>
         {value ? (
-          <View style={{...defaultCheckboxStyleChecked, ...checkboxStyle}}>
+          <View
+            style={{
+              ...defaultCheckboxStyleChecked,
+              ...checkedCheckboxStyle,
+              ...checkboxStyle
+            }}
+          >
             <SvgXml
               xml={icon}
               width={iconWidth}
