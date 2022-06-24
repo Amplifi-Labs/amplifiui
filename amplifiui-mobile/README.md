@@ -697,10 +697,10 @@ export default function App() {
             style={tw`mt-4`}
             label="This is a custom checkbox. Click Me!"
             labelStyle={tw`text-red-800 font-bold`}
-            checkboxStyle={tw`h-[18px] w-[18px] rounded-[3px] border-[#505D68] border-2 bg-white`}
+            checkboxStyle={tw`h-[18px] w-[18px] rounded-[3px] border-[#505D68] border bg-white`}
             checkedCheckboxStyle={tw`bg-white`}
-            iconWidth={14}
-            iconHeight={14}
+            iconWidth={12}
+            iconHeight={12}
             value={check2Selected}
             onPress={() => setCheck2Selected(!check2Selected)}
             icon={CustomCheck}            
