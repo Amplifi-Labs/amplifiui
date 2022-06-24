@@ -57,8 +57,8 @@ const Checkbox = ({
           <View
             style={{
               ...defaultCheckboxStyleChecked,
+              ...checkboxStyle,
               ...checkedCheckboxStyle,
-              ...checkboxStyle
             }}
           >
             <SvgXml
