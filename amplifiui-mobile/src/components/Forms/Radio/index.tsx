@@ -14,6 +14,7 @@ type Props = {
   radioStyle?: Style;
   value: boolean;
   onPress: () => void;
+  icon?: string;
 };
 
 const Radio = ({
@@ -24,6 +25,7 @@ const Radio = ({
   radioStyle,
   value,
   onPress,
+  icon = RadioIcon,
 }: Props): JSX.Element => {
   const defaultStyle = tw.style('flex-row');
 
@@ -44,7 +46,7 @@ const Radio = ({
       <TouchableOpacity style={tw`justify-center`} onPress={onPress}>
         {value ? (
           <View>
-            <SvgXml xml={RadioIcon} />
+            <SvgXml xml={icon} />
           </View>
         ) : (
           <View style={{...defaultRadioStyle, ...radioStyle}} />
