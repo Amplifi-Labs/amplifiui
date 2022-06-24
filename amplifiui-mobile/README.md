@@ -668,7 +668,66 @@ This component renders a checkbox element to be used on forms.
 Try using Expo:
 https://snack.expo.dev/@paulorieck/amplifi-ui---mobile---forms---checkbox?platform=ios
 
+```
+import * as React from 'react';
+import { View, Text, SafeAreaView } from 'react-native';
+import { Card, Button, InputPassword, Checkbox } from '@amplifiui/mobile';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+
+import tw from './services/tw';
+
+import CustomCheck from './icons/custom-check';
+
+export default function App() {
+  const [check1Selected, setCheck1Selected] = React.useState(true);
+  const [check2Selected, setCheck2Selected] = React.useState(true);
+
+  return (
+    <SafeAreaView style={tw`bg-gray-200 flex-1`}>
+      <View style={tw`m-4`}>
+        <Card tw={tw} style={tw`mt-4 shadow`}>
+          <Checkbox
+            tw={tw}
+            label="This is a vanilla checkbox. Click Me!"
+            value={check1Selected}
+            onPress={() => setCheck1Selected(!check1Selected)}
+          />
+          <Checkbox
+            tw={tw}
+            style={tw`mt-4`}
+            label="This is a custom checkbox. Click Me!"
+            labelStyle={tw`text-red-800 font-bold`}
+            checkboxStyle={tw`h-[18px] w-[18px] rounded-[3px] border-[#505D68] border-2 bg-white`}
+            checkedCheckboxStyle={tw`bg-white`}
+            iconWidth={14}
+            iconHeight={14}
+            value={check2Selected}
+            onPress={() => setCheck2Selected(!check2Selected)}
+            icon={CustomCheck}            
+          />
+        </Card>
+      </View>
+    </SafeAreaView>
+  );
+}
+```
+
+<img src="https://raw.githubusercontent.com/Amplifi-Labs/amplifiui/main/amplifiui-mobile/files/sample-checkbox.png" alt="Checkbox Sample Image" width=200  />
+
 #### Props
+| Variable         | Value Type                   | Default | Mandatory          | Notes                                                                          |
+| ---------------- | ---------------------------- | ------- | ------------------ | ------------------------------------------------------------------------------ |
+| tw               | Tailwind Function            | \_      | :heavy_check_mark: | \_                                                                             |
+| style            | Tailwind Style               | \_      | :x:                | This style is applied to the container View                                    |
+| label            | string                       | \_      | :x:                | Text that is shown beside the checkbox (right side).                           |
+| labelStyle       | Tailwind Style               | \_      | :x:                | Defines the style for the label.                                               |
+| checkboxStyle    | Tailwind Style               | \_      | :x:                | Defines the style for the checkbox.                                            |
+| checkedCheckboxStyle  | Tailwind Style          | \_      | :x:                | Defines the style for the checked checkbox.                                    |
+| value            | boolean                      | \_      | :heavy_check_mark: | Defines if the checkbox is checked or not.                                     |
+| onPress          | () => void                   | \_      | :heavy_check_mark: | Callback when the Checkbox is clicked.                                         |
+| icon             | SVG String                   | \_      | :x:                | To set a custom icon, is displayed when checked.                               |
+| iconWidth        | number                       | \_      | :x:                | To define a custom width to the icon.                                          |
+| iconHeight       | number                       | \_      | :x:                | To define a custom height to the icon.                                         |
 
 ### Radio
 
