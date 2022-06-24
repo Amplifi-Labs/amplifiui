@@ -13,6 +13,7 @@ type Props = {
   checkboxStyle?: Style;
   value: boolean;
   onPress: () => void;
+  icon?: string;
 };
 
 const Checkbox = ({
@@ -23,6 +24,7 @@ const Checkbox = ({
   checkboxStyle,
   value,
   onPress,
+  icon = Icon,
 }: Props): JSX.Element => {
   const defaultStyle = tw.style('flex-row');
 
@@ -47,7 +49,7 @@ const Checkbox = ({
       <TouchableOpacity style={tw`justify-center`} onPress={onPress}>
         {value ? (
           <View style={{...defaultCheckboxStyleChecked, ...checkboxStyle}}>
-            <SvgXml xml={Icon} width={9} />
+            <SvgXml xml={icon} width={9} />
           </View>
         ) : (
           <View style={{...defaultCheckboxStyle, ...checkboxStyle}} />

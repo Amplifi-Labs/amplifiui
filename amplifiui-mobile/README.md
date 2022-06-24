@@ -40,6 +40,8 @@ If your project uses Amplifi UI, please, let us know! We would love :heart: to h
     - [InputNumber](#inputnumber)
     - [InputPassword](#inputpassword)
     - [InputText](#inputtext)
+    - [Checkbox](#checkbox)
+    - [Radio](#radio)
   - [Typography](#typography)
   - [HR](#hr)
   - [Image](#image)
@@ -656,6 +658,26 @@ export default function App() {
 | errorStyle       | Tailwind Style               | \_      | :x:                | This style is applied specifically to the error text.                          |
 | keyboardType     | RN KeyboardTypeOptions       | \_      | :x:                | Defines the type of keyboards that will be presented to the user.              |
 | onBlur           | NativeSyntheticEvent         | \_      | :x:                | Detects when the user leaves the input field. Used in combination with Formik. |
+
+### Checkbox
+
+#### Description:
+This component renders a checkbox element to be used on forms.
+
+#### Samples
+Try using Expo:
+https://snack.expo.dev/@paulorieck/amplifi-ui---mobile---forms---checkbox?platform=ios
+
+#### Props
+
+### Radio
+
+#### Description:
+
+#### Samples
+
+#### Props
+
 ## Typography
 
 #### Description:
