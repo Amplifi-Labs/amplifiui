@@ -11,7 +11,7 @@ type Props = {
   label?: string;
   labelStyle?: Style;
   checkboxStyle?: Style;
-  checkedCheckboxStyle?: Style
+  checkedCheckboxStyle?: Style;
   value: boolean;
   onPress: () => void;
   icon?: string;
