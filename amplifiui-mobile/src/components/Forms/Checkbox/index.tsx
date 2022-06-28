@@ -12,7 +12,6 @@ type Props = {
   labelStyle?: Style;
   checkboxStyle?: Style;
   checkedCheckboxStyle?: Style;
-  touchableAreaStyle?: Style;
   value: boolean;
   onPress: () => void;
   icon?: string;
@@ -29,7 +28,6 @@ const Checkbox = ({
   labelStyle,
   checkboxStyle,
   checkedCheckboxStyle,
-  touchableAreaStyle,
   value,
   onPress,
   icon = Icon,
@@ -49,7 +47,7 @@ const Checkbox = ({
   );
 
   const defaultCheckboxStyleChecked = tw.style(
-    'h-4 w-4 rounded bg-primary-700 border border-primary-700 justify-center items-center',
+    'bg-primary-700 border border-primary-700 justify-center items-center',
   );
 
   const defaultCheckboxStyle = tw.style(
@@ -73,15 +71,13 @@ const Checkbox = ({
       onPress={onPress}>
       <View style={tw`flex-row`}>
         <View
-          style={{
-            ...defaultTouchableAreaStyle,
-            ...touchableAreaStyle
-          }}
+          style={defaultTouchableAreaStyle}
         >
           <View style={tw`justify-center`}>
             {value ? (
               <View
                 style={{
+                  ...defaultCheckboxStyle,
                   ...defaultCheckboxStyleChecked,
                   ...checkboxStyle,
                   ...checkedCheckboxStyle,
