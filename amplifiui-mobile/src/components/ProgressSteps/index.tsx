@@ -18,6 +18,7 @@ type Props = {
   opacity?: number;
   radius?: number;
   unselectedWidth?: number;
+  accessibilityLabel: string;
 };
 
 const ProgressSteps = ({
@@ -33,6 +34,7 @@ const ProgressSteps = ({
   radius = 2,
   unselectedWidth = 4,
   unselectedColor = "#6B7280",
+  accessibilityLabel,
 }: Props): JSX.Element => {
   const defaultStyles = tw`h-1`;
 
@@ -65,7 +67,12 @@ const ProgressSteps = ({
 
   return (
     <View style={{...defaultStyles, ...style}}>
-      <Image tw={tw} svg={svg} width={imageWidth} />
+      <Image
+        tw={tw}
+        svg={svg}
+        width={imageWidth}
+        accessibilityLabel={accessibilityLabel}
+      />
     </View>
   );
 };

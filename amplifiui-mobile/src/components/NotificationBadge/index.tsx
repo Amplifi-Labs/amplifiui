@@ -18,6 +18,7 @@ type Props = {
   showBadge?: boolean;
   size?: number;
   onPress?: () => void;
+  accessibilityLabel: string;
 };
 
 const NotificationBadge = ({
@@ -31,6 +32,7 @@ const NotificationBadge = ({
   showBadge = false,
   size = 40,
   onPress,
+  accessibilityLabel,
 }: Props) => {
   icon = icon || Icon({color: iconColor});
 
@@ -53,6 +55,7 @@ const NotificationBadge = ({
           svg={icon}
           width={18 * (size / 40)}
           height={19 * (size / 40)}
+          accessibilityLabel={accessibilityLabel}
         />
       </View>
       {showBadge && (

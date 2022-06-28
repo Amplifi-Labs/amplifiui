@@ -10,9 +10,17 @@ type Props = {
   onPress?: () => void;
   style?: Style;
   size?: number;
+  accessibilityLabel: string;
 };
 
-const RoundAvatar = ({tw, src, onPress, style, size = 40}: Props) => {
+const RoundAvatar = ({
+  tw,
+  src,
+  onPress,
+  style,
+  size = 40,
+  accessibilityLabel,
+}: Props) => {
   const defaultStyle = tw`rounded-full border border-gray-200`;
 
   return (
@@ -23,6 +31,7 @@ const RoundAvatar = ({tw, src, onPress, style, size = 40}: Props) => {
         width={size}
         height={size}
         style={{...defaultStyle, ...style}}
+        accessibilityLabel={accessibilityLabel}
       />
     </TouchableOpacity>
   );
