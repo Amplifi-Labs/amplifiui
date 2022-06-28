@@ -4,7 +4,7 @@ import {SvgXml} from 'react-native-svg';
 import {TailwindFn} from 'twrnc';
 import {Style} from 'twrnc/dist/esm/types';
 
-import RadioIcon from './radio-icon';
+import RadioIcon from './icon';
 
 type Props = {
   tw: TailwindFn;
@@ -12,9 +12,12 @@ type Props = {
   label?: string;
   labelStyle?: Style;
   radioStyle?: Style;
+  checkedRadioStyle?: Style;
   value: boolean;
   onPress: () => void;
   icon?: string;
+  accessibilityLabel?: string;
+  accessibilityHint?: string;
 };
 
 const Radio = ({
@@ -23,14 +26,25 @@ const Radio = ({
   style,
   labelStyle,
   radioStyle,
+  checkedRadioStyle,
   value,
   onPress,
   icon = RadioIcon,
+  accessibilityLabel,
+  accessibilityHint,
 }: Props): JSX.Element => {
-  const defaultStyle = tw.style('flex-row');
+  const defaultStyle = tw.style('flex-col justify-center overflow-hidden');
 
   const defaultTextStyle = tw.style(
-    'text-sm text-gray-700 pl-3 justify-center',
+    'text-sm text-gray-700 -ml-2 justify-center',
+  );
+
+  const defaultTouchableAreaStyle = tw.style(
+    'flex-row w-[48px] h-[48px] justify-center z-100 overflow-y-hidden'
+  );
+
+  const defaultRadioStyleChecked = tw.style(
+    'bg-primary-700 border border-primary-700 justify-center items-center',
   );
 
   const defaultRadioStyle = tw.style(
@@ -38,24 +52,46 @@ const Radio = ({
   );
 
   return (
-    <View
+    <TouchableOpacity
       style={{
         ...defaultStyle,
         ...style,
-      }}>
-      <TouchableOpacity style={tw`justify-center`} onPress={onPress}>
-        {value ? (
-          <View>
-            <SvgXml xml={icon} />
+      }}
+      accessible={true}
+      accessibilityRole="checkbox"
+      accessibilityLabel={
+        accessibilityLabel ?
+          `${accessibilityLabel}. ${value ? 'selected' : 'unselected'}`
+          : `${label}. ${value ? 'selected' : 'unselected'}`
+      }
+      accessibilityHint={accessibilityHint}
+      onPress={onPress}>
+      <View style={tw`flex-row`}>
+        <View style={defaultTouchableAreaStyle}>
+          <View style={tw`justify-center`}>
+            {value ? (
+              <View
+                style={{
+                  ...defaultRadioStyle,
+                  ...defaultRadioStyleChecked,
+                  ...radioStyle,
+                  ...checkedRadioStyle,
+                }}
+              >
+                <SvgXml xml={icon} />
+              </View>
+            ) : (
+              <View style={{...defaultRadioStyle, ...radioStyle}} />
+            )}
           </View>
-        ) : (
-          <View style={{...defaultRadioStyle, ...radioStyle}} />
+        </View>
+        {label && (
+          <View style={tw`flex-col justify-center`}>
+            <Text style={{...defaultTextStyle, ...labelStyle}}>{label}</Text>
+          </View>
         )}
-      </TouchableOpacity>
-      {label && (
-        <Text style={{...defaultTextStyle, ...labelStyle}}>{label}</Text>
-      )}
-    </View>
+      </View>
+    </TouchableOpacity>
   );
 };
 
