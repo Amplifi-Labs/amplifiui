@@ -10,7 +10,13 @@ type Props = {
 
 const Label = ({tw, children, style}: Props) => {
   const defaultStyle = tw.style('text-sm font-medium text-gray-700 pb-1x');
-  return <Text style={{...defaultStyle, ...style}}>{children}</Text>;
+  return (
+    <Text
+      style={{...defaultStyle, ...style}}
+      accessibilityRole="text"
+    >
+      {children}
+    </Text>);
 };
 
 export default Label;

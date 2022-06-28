@@ -18,7 +18,7 @@ import Image from './components/Image';
 import LoadingRound from './components/LoadingRound';
 import NotificationBadge from './components/NotificationBadge';
 import ProgressSteps from './components/ProgressSteps';
-import RadioGroup from './components/RadioGroup';
+import RadioGroup from './components/Forms/RadioGroup';
 import RoundAvatar from './components/RoundAvatar';
 import Spinner from './components/Spinner';
 import SwipeCarousel from './components/SwipeCarousel';
@@ -30,7 +30,7 @@ import Info from './components/Text/Info';
 import Label from './components/Text/Label';
 import Paragraph from './components/Text/Paragraph';
 import ToastMessage from './components/ToastMessage';
-import ToggleButton from './components/ToggleButton';
+import ToggleButton from './components/Forms/ToggleButton';
 
 export {
   AppStatusBar,

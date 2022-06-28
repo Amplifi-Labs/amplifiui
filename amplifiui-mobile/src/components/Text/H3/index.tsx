@@ -12,7 +12,14 @@ type Props = {
 
 const H3 = ({tw, style, children}: Props): JSX.Element => {
   const defaultStyles = tw`font-medium text-lg text-gray-700`;
-  return <Text style={{...defaultStyles, ...style}}>{children}</Text>;
+  return (
+    <Text
+      style={{...defaultStyles, ...style}}
+      accessibilityRole="text"
+    >
+      {children}
+    </Text>
+  );
 };
 
 export default H3;

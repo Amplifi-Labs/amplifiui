@@ -19,6 +19,8 @@ type Props = {
   loadingIcon?: string;
   loadingStyle?: Style;
   isLoading?: boolean;
+  accessibilityLabel?: string;
+  accessibilityHint?: string;
 };
 
 const Button = ({
@@ -33,6 +35,8 @@ const Button = ({
   loadingIcon = DefaultLoadingIcon,
   loadingStyle,
   isLoading = false,
+  accessibilityLabel,
+  accessibilityHint,
 }: Props): JSX.Element => {
   const bgColor = `bg-${type || 'indigo'}-700`;
 
@@ -46,7 +50,13 @@ const Button = ({
   const loadingDefaultStyles = tw.style('ml-4');
 
   return (
-    <TouchableOpacity style={{...defaultStyles, ...style}} onPress={onPress}>
+    <TouchableOpacity
+      style={{...defaultStyles, ...style}}
+      onPress={onPress}
+      accessibilityRole="button"
+      accessibilityLabel={accessibilityLabel}
+      accessibilityHint={accessibilityHint}
+    >
       <View style={tw`flex-row items-center`}>
         {iconLeft && (
           <View style={tw`mr-4`}>

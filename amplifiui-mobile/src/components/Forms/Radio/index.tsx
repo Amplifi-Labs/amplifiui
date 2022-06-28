@@ -58,7 +58,7 @@ const Radio = ({
         ...style,
       }}
       accessible={true}
-      accessibilityRole="checkbox"
+      accessibilityRole="radio"
       accessibilityLabel={
         accessibilityLabel ?
           `${accessibilityLabel}. ${value ? 'selected' : 'unselected'}`

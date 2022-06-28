@@ -12,14 +12,32 @@ type Props = {
   style?: Style;
   width?: number;
   height?: number;
+  accessibilityLabel: string;
+  accessibilityHint?: string;
 };
 
-const Image = ({tw, svg, src, style, width, height}: Props): JSX.Element => {
+const Image = ({
+  tw,
+  svg,
+  src,
+  style,
+  width,
+  height,
+  accessibilityLabel,
+  accessibilityHint,
+}: Props): JSX.Element => {
   const defaultStyles = tw``;
 
   if (svg) {
     return (
-      <SvgXml xml={svg} width={width || '100%'} height={height || '100%'} />
+      <SvgXml
+        xml={svg}
+        width={width || '100%'}
+        height={height || '100%'}
+        accessibilityRole="image"
+        accessibilityLabel={accessibilityLabel}
+        accessibilityHint={accessibilityHint}
+      />
     );
   }
 
@@ -34,6 +52,9 @@ const Image = ({tw, svg, src, style, width, height}: Props): JSX.Element => {
           }`,
         }}
         source={src}
+        accessibilityRole="image"
+        accessibilityLabel={accessibilityLabel}
+        accessibilityHint={accessibilityHint}
       />
     );
   }
