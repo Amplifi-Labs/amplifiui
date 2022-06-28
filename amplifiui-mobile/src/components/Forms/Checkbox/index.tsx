@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {View, TouchableOpacity, Text} from 'react-native';
 import {SvgXml} from 'react-native-svg';
-import {TailwindFn} from 'twrnc';
+import {TailwindFn} from 'twrnc/dist/esm/types';
 import {Style} from 'twrnc/dist/esm/types';
 import Icon from './icon';
 
@@ -12,11 +12,14 @@ type Props = {
   labelStyle?: Style;
   checkboxStyle?: Style;
   checkedCheckboxStyle?: Style;
+  touchableAreaStyle?: Style;
   value: boolean;
   onPress: () => void;
   icon?: string;
   iconWidth?: number;
   iconHeight?: number;
+  accessibilityLabel?: string;
+  accessibilityHint?: string;
 };
 
 const Checkbox = ({
@@ -26,16 +29,23 @@ const Checkbox = ({
   labelStyle,
   checkboxStyle,
   checkedCheckboxStyle,
+  touchableAreaStyle,
   value,
   onPress,
   icon = Icon,
   iconWidth = 9,
   iconHeight = 9,
+  accessibilityLabel,
+  accessibilityHint,
 }: Props): JSX.Element => {
-  const defaultStyle = tw.style('flex-row');
+  const defaultStyle = tw.style('flex-col justify-center overflow-hidden');
 
   const defaultTextStyle = tw.style(
-    'text-sm text-gray-700 pl-3 justify-center',
+    'text-sm text-gray-700 -ml-2 justify-center',
+  );
+
+  const defaultTouchableAreaStyle = tw.style(
+    'flex-row w-[48px] h-[48px] justify-center z-100 overflow-y-hidden'
   );
 
   const defaultCheckboxStyleChecked = tw.style(
@@ -47,34 +57,54 @@ const Checkbox = ({
   );
 
   return (
-    <View
+    <TouchableOpacity
       style={{
         ...defaultStyle,
         ...style,
-      }}>
-      <TouchableOpacity style={tw`justify-center`} onPress={onPress}>
-        {value ? (
-          <View
-            style={{
-              ...defaultCheckboxStyleChecked,
-              ...checkboxStyle,
-              ...checkedCheckboxStyle,
-            }}
-          >
-            <SvgXml
-              xml={icon}
-              width={iconWidth}
-              height={iconHeight}
-            />
+      }}
+      accessible={true}
+      accessibilityRole="checkbox"
+      accessibilityLabel={
+        accessibilityLabel ?
+          `${accessibilityLabel}. ${value ? 'selected' : 'unselected'}`
+          : `${label}. ${value ? 'selected' : 'unselected'}`
+      }
+      accessibilityHint={accessibilityHint}
+      onPress={onPress}>
+      <View style={tw`flex-row`}>
+        <View
+          style={{
+            ...defaultTouchableAreaStyle,
+            ...touchableAreaStyle
+          }}
+        >
+          <View style={tw`justify-center`}>
+            {value ? (
+              <View
+                style={{
+                  ...defaultCheckboxStyleChecked,
+                  ...checkboxStyle,
+                  ...checkedCheckboxStyle,
+                }}
+              >
+                <SvgXml
+                  xml={icon}
+                  width={iconWidth}
+                  height={iconHeight}
+                />
+              </View>
+            ) : (
+              <View style={{...defaultCheckboxStyle, ...checkboxStyle}} />
+            )}
           </View>
-        ) : (
-          <View style={{...defaultCheckboxStyle, ...checkboxStyle}} />
+        </View>
+        {label && (
+          <View style={tw`flex-col justify-center`}>
+            <Text style={{...defaultTextStyle, ...labelStyle}}>{label}</Text>
+          </View>
         )}
-      </TouchableOpacity>
-      {label && (
-        <Text style={{...defaultTextStyle, ...labelStyle}}>{label}</Text>
-      )}
-    </View>
+      </View>
+    </TouchableOpacity>
   );
 };
 
