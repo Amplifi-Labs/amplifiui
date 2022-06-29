@@ -14,6 +14,7 @@ type Props = {
   style?: Style;
   labelStyle?: Style;
   inputStyle?: Style;
+  placeholderStyle?: Style;
   iconStyle?: Style;
   helperStyle?: Style;
   onChangeText: (text: string) => void;
@@ -35,6 +36,7 @@ const InputNumber = ({
   style,
   labelStyle,
   inputStyle,
+  placeholderStyle,
   iconStyle,
   helperStyle,
   onChangeText,
@@ -64,8 +66,8 @@ const InputNumber = ({
   const typeInputStyle = inputType
     ? tw`border-${inputType}-700 ${
         inputType === 'primary' ? 'border-2' : 'border'
-      }`
-    : tw``;
+      } min-h-12`
+    : tw`min-h-12`;
 
   const typeHelperStyle = helperType ? tw`text-${helperType}-700` : tw``;
 
@@ -81,6 +83,7 @@ const InputNumber = ({
           onChangeText={onChangeText}
           value={value || undefined}
           placeholder={placeholder || undefined}
+          placeholderStyle={placeholderStyle}
           keyboardType={keyboardType}
           mask={mask}
           showObfuscatedValue={showObfuscatedValue}

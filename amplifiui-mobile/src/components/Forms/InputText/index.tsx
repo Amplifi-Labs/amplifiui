@@ -66,8 +66,8 @@ const InputText = ({
   const typeInputStyle = inputType
     ? tw`border-${inputType}-700 ${
         inputType === 'primary' ? 'border-2' : 'border'
-      }`
-    : tw``;
+      } min-h-12`
+    : tw`min-h-12`;
 
   const typeHelperStyle = helperType ? tw`text-${helperType}-700` : tw``;
 

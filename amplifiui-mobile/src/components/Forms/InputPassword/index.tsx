@@ -13,7 +13,7 @@ type Props = {
   style?: Style;
   labelStyle?: Style;
   inputStyle?: Style;
-  textInputStyle?: Style;
+  placeholderStyle?: Style;
   helperStyle?: Style;
   iconStyle?: Style;
   onChangeText: (text: string) => void;
@@ -35,6 +35,7 @@ const InputPassword: React.FC<Props> = ({
   style,
   labelStyle,
   inputStyle,
+  placeholderStyle,
   helperStyle,
   iconStyle,
   onChangeText,
@@ -48,6 +49,8 @@ const InputPassword: React.FC<Props> = ({
   onBlur,
 }): JSX.Element => {
   const [visible, setVisible] = React.useState(false);
+
+  const [isFocused, setFocused] = React.useState(false);
 
   const defaultInputStyle = tw.style(
     'text-sm font-normal text-gray-500 p-3 bg-white rounded-md border-gray-300 border w-full',
@@ -64,8 +67,8 @@ const InputPassword: React.FC<Props> = ({
   const typeInputStyle = inputType
     ? tw`border-${inputType}-700 ${
         inputType === 'primary' ? 'border-2' : 'border'
-      }`
-    : tw``;
+      } min-h-12`
+    : tw`min-h-12`;
 
   const typeHelperStyle = helperType ? tw`text-${helperType}-700` : tw``;
 
@@ -76,13 +79,32 @@ const InputPassword: React.FC<Props> = ({
       )}
       <View>
         <TextInput
-          style={{...defaultInputStyle, ...typeInputStyle, ...inputStyle}}
+          style={{
+            ...defaultInputStyle,
+            ...typeInputStyle,
+            ...inputStyle,
+          }}
           onChangeText={onChangeText}
           value={value || undefined}
-          placeholder={placeholder?.toString() || undefined}
           secureTextEntry={!visible}
-          onBlur={onBlur}
-        />
+          onFocus={() => setFocused(true)}
+          onBlur={(e) => {
+            if (onBlur) {
+              onBlur(e);
+            }
+
+            setFocused(false);
+          }}
+        >
+          {!isFocused && !value && (
+            <Text style={{
+              ...tw`text-gray-500 font-normal`,
+              ...placeholderStyle
+            }}>
+              {placeholder?.toString() || ''}
+            </Text>
+          )}
+        </TextInput>
         <View style={{...defaultIconStyle, ...iconStyle}}>
           <SvgXml
             xml={visible ? visibleIcon : invisibleIcon}

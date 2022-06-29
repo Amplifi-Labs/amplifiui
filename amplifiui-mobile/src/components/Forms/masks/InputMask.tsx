@@ -18,6 +18,7 @@ export default React.forwardRef(function (
     selection,
     tw,
     placeholderStyle,
+    placeholder,
     ...rest
   } = props;
 
@@ -74,7 +75,7 @@ export default React.forwardRef(function (
   );
 
   const defaultPlaceholder = React.useMemo(() => {
-    if (maskArray) {
+    if (maskArray && !placeholder) {
       return maskArray
         .map(maskChar => {
           if (typeof maskChar === 'string') {
@@ -85,7 +86,7 @@ export default React.forwardRef(function (
         })
         .join('');
     } else {
-      return undefined;
+      return placeholder;
     }
   }, [maskArray, placeholderFillCharacter]);
 
@@ -95,7 +96,6 @@ export default React.forwardRef(function (
 
   return (
     <TextInput
-      // placeholder={defaultPlaceholder}
       {...rest}
       value={inputValue}
       selection={
@@ -105,7 +105,6 @@ export default React.forwardRef(function (
       }
       onChangeText={handleChangeText}
       ref={ref}
-      // isFocused={isFocused}
       onFocus={() => setFocused(true)}
       onBlur={() => setFocused(false)}
     >
