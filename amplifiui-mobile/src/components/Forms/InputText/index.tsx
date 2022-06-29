@@ -14,6 +14,7 @@ type Props = {
   style?: Style;
   labelStyle?: Style;
   inputStyle?: Style;
+  placeholderStyle?: Style;
   iconStyle?: Style;
   helperStyle?: Style;
   onChangeText: (text: string) => void;
@@ -35,6 +36,7 @@ const InputText = ({
   style,
   labelStyle,
   inputStyle,
+  placeholderStyle,
   iconStyle,
   helperStyle,
   onChangeText,
@@ -81,6 +83,7 @@ const InputText = ({
           onChangeText={onChangeText}
           value={value || undefined}
           placeholder={placeholder || undefined}
+          placeholderStyle={placeholderStyle}
           keyboardType={keyboardType}
           mask={mask}
           showObfuscatedValue={showObfuscatedValue}
