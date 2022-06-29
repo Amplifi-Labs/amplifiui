@@ -75,7 +75,14 @@ const InputPassword: React.FC<Props> = ({
   return (
     <View style={style}>
       {label && (
-        <Text style={{...defaultLabelStyle, ...labelStyle}}>{label}</Text>
+        <Text
+          style={{
+            ...defaultLabelStyle,
+            ...labelStyle
+          }}
+        >
+          {label}
+        </Text>
       )}
       <View>
         <TextInput
@@ -86,7 +93,7 @@ const InputPassword: React.FC<Props> = ({
           }}
           onChangeText={onChangeText}
           value={value || undefined}
-          secureTextEntry={!visible || !value}
+          secureTextEntry={!visible && !value}
           onFocus={() => setFocused(true)}
           onBlur={(e) => {
             if (onBlur) {
@@ -97,10 +104,12 @@ const InputPassword: React.FC<Props> = ({
           }}
         >
           {!isFocused && !value && (
-            <Text style={{
-              ...tw`text-gray-500 font-normal`,
-              ...placeholderStyle
-            }}>
+            <Text
+              style={{
+                ...tw`text-gray-500 font-normal`,
+                ...placeholderStyle
+              }}
+            >
               {placeholder?.toString() || ''}
             </Text>
           )}
