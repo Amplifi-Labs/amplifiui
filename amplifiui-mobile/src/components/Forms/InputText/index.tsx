@@ -76,6 +76,7 @@ const InputText = ({
       )}
       <View>
         <InputMask
+          tw={tw}
           style={{...defaultInputStyle, ...typeInputStyle, ...inputStyle}}
           onChangeText={onChangeText}
           value={value || undefined}
