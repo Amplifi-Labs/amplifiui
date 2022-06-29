@@ -86,7 +86,7 @@ const InputPassword: React.FC<Props> = ({
           }}
           onChangeText={onChangeText}
           value={value || undefined}
-          secureTextEntry={!visible}
+          secureTextEntry={!visible || !value}
           onFocus={() => setFocused(true)}
           onBlur={(e) => {
             if (onBlur) {
