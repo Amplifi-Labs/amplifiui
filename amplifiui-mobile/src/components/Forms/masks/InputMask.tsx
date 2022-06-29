@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {TextInput} from 'react-native';
+import {TextInput, Text} from 'react-native';
 
 import type {MaskInputProps} from './InputMask.types';
 import formatWithMask from './formatWithMask';
@@ -16,8 +16,12 @@ export default React.forwardRef(function (
     obfuscationCharacter,
     showObfuscatedValue,
     selection,
+    tw,
+    placeholderStyle,
     ...rest
   } = props;
+
+  const [isFocused, setFocused] = React.useState(false);
 
   const maskArray = React.useMemo(
     () => (typeof mask === 'function' ? mask(value) : mask),
@@ -91,7 +95,7 @@ export default React.forwardRef(function (
 
   return (
     <TextInput
-      placeholder={defaultPlaceholder}
+      // placeholder={defaultPlaceholder}
       {...rest}
       value={inputValue}
       selection={
@@ -101,6 +105,18 @@ export default React.forwardRef(function (
       }
       onChangeText={handleChangeText}
       ref={ref}
-    />
+      // isFocused={isFocused}
+      onFocus={() => setFocused(true)}
+      onBlur={() => setFocused(false)}
+    >
+      {!isFocused && !value && (
+        <Text style={{
+          ...tw`text-gray-500 font-normal`,
+          ...placeholderStyle
+        }}>
+          {defaultPlaceholder}
+        </Text>
+      )}
+    </TextInput>
   );
 });
