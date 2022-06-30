@@ -1,9 +1,15 @@
 import * as React from 'react';
-import { NativeSyntheticEvent, Text, TextInput, TextInputFocusEventData, View } from 'react-native';
+import {
+  NativeSyntheticEvent,
+  Text,
+  TextInput,
+  TextInputFocusEventData,
+  View,
+  TouchableOpacity,
+} from 'react-native';
 import { SvgXml } from 'react-native-svg';
 import { TailwindFn } from 'twrnc';
 import { Style } from 'twrnc/dist/esm/types';
-
 
 type Props = {
   tw: TailwindFn;
@@ -52,8 +58,17 @@ const InputPassword: React.FC<Props> = ({
 
   const [isFocused, setFocused] = React.useState(false);
 
+  const [securePasswordVisible, setSecurePasswordVisible] = React.useState(true);
+
+  React.useEffect(() => {
+    const condition1 = (!visible && (value === '' || typeof value === 'undefined') );
+    const condition2 = !(!visible && (value !== '' || typeof value !== 'undefined') );
+
+    setSecurePasswordVisible(condition1 || condition2 || visible);
+  }, [visible, value]);
+
   const defaultInputStyle = tw.style(
-    'text-sm font-normal text-gray-500 p-3 bg-white rounded-md border-gray-300 border w-full',
+    'text-sm font-normal text-gray-500 p-3 bg-white rounded-md border-gray-300 border w-full'
   );
 
   const defaultLabelStyle = tw.style('text-sm font-medium text-gray-700 pb-1');
@@ -61,7 +76,7 @@ const InputPassword: React.FC<Props> = ({
   const defaultHelperStyle = tw.style('text-xs font-normal text-gray-500 pt-1');
   const defaultErrorStyle = tw.style('text-xs font-normal text-red-500 pt-1');
   const defaultIconStyle = tw.style(
-    'justify-center absolute top-0 right-0 h-full w-8',
+    'justify-center absolute top-0 right-0 h-full w-8'
   );
 
   const typeInputStyle = inputType
@@ -78,9 +93,8 @@ const InputPassword: React.FC<Props> = ({
         <Text
           style={{
             ...defaultLabelStyle,
-            ...labelStyle
-          }}
-        >
+            ...labelStyle,
+          }}>
           {label}
         </Text>
       )}
@@ -91,9 +105,18 @@ const InputPassword: React.FC<Props> = ({
             ...typeInputStyle,
             ...inputStyle,
           }}
-          onChangeText={onChangeText}
-          value={value || undefined}
-          secureTextEntry={!visible && !value}
+          onChangeText={(e) => {
+            if (!securePasswordVisible) {
+              if (e.length > value.length) {
+                const c = e.toString().replace(/[•]/g,'');
+                onChangeText(value+c);
+              } else {
+                onChangeText(value.substring(0, value.length-1));
+              }
+            } else {
+              onChangeText(e);
+            }
+          }}
           onFocus={() => setFocused(true)}
           onBlur={(e) => {
             if (onBlur) {
@@ -101,34 +124,54 @@ const InputPassword: React.FC<Props> = ({
             }
 
             setFocused(false);
-          }}
-        >
-          {!isFocused && !value && (
-            <Text
-              style={{
-                ...tw`text-gray-500 font-normal`,
-                ...placeholderStyle
-              }}
-            >
-              {placeholder?.toString() || ''}
-            </Text>
-          )}
+          }}>
+          <>
+            {!isFocused && !!placeholder && !value && (
+              <Text
+                style={{
+                  ...tw`text-gray-500 font-normal`,
+                  ...placeholderStyle,
+                }}>
+                {placeholder || ''}
+              </Text>
+            )}
+            {!!value && (
+              <Text>
+                {securePasswordVisible ? value : value.toString().replace(/./g,'•')}
+              </Text>
+            )}
+          </>
         </TextInput>
-        <View style={{...defaultIconStyle, ...iconStyle}}>
-          <SvgXml
-            xml={visible ? visibleIcon : invisibleIcon}
-            onPress={() => setVisible(!visible)}
-          />
-        </View>
+        <TouchableOpacity
+          style={{
+            ...defaultIconStyle,
+            ...iconStyle,
+          }}
+          onPress={() => setVisible(!visible)}
+        >
+          <SvgXml xml={visible ? visibleIcon : invisibleIcon} />
+        </TouchableOpacity>
       </View>
       {helper && !error && (
         <Text
-          style={{...defaultHelperStyle, ...typeHelperStyle, ...helperStyle}}>
+          style={{
+            ...defaultHelperStyle,
+            ...typeHelperStyle,
+            ...helperStyle
+          }}
+        >
           {helper}
         </Text>
       )}
       {error && (
-        <Text style={{...defaultErrorStyle, ...errorStyle}}>{error}</Text>
+        <Text
+          style={{
+            ...defaultErrorStyle,
+            ...errorStyle
+          }}
+        >
+          {error}
+        </Text>
       )}
     </View>
   );
