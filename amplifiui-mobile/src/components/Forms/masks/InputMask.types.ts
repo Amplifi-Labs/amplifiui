@@ -30,4 +30,6 @@ export interface MaskInputProps extends Omit<TextInputProps, 'onChangeText'> {
   tw: TailwindFn;
 
   placeholderStyle?: Style;
+
+  valueStyle?: Style;
 }
