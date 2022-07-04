@@ -11,6 +11,7 @@ export default React.forwardRef(function (
   const {
     mask,
     value,
+    valueStyle,
     onChangeText,
     placeholderFillCharacter = '_',
     obfuscationCharacter,
@@ -97,7 +98,7 @@ export default React.forwardRef(function (
   return (
     <TextInput
       {...rest}
-      value={inputValue}
+      // value={inputValue}
       selection={
         isValueObfuscated
           ? {start: inputValue.length, end: inputValue.length}
@@ -114,6 +115,14 @@ export default React.forwardRef(function (
           ...placeholderStyle
         }}>
           {defaultPlaceholder}
+        </Text>
+      )}
+      {!!value && (
+        <Text style={{
+          ...tw`text-gray-500 font-normal`,
+          ...valueStyle
+        }}>
+          {inputValue}
         </Text>
       )}
     </TextInput>
