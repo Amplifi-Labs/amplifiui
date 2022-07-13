@@ -155,7 +155,7 @@ const InputText = ({
       {showPicker && (
         <Picker
           selectedValue={selectedCountry}
-          onValueChange={(itemValue, itemIndex) => {
+          onValueChange={(itemValue) => {
             if (to) {
               clearTimeout(to);
             }
