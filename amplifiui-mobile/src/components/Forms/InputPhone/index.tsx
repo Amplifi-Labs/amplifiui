@@ -36,7 +36,7 @@ type Props = {
   defaultCountry?: 'US' | 'BR';
 } & MaskInputProps;
 
-const InputText = ({
+const InputPhone = ({
   tw,
   label,
   placeholder,
@@ -178,4 +178,4 @@ const InputText = ({
   );
 };
 
-export default InputText;
+export default InputPhone;

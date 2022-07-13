@@ -11,6 +11,7 @@ import InputNumber from './components/Forms/InputNumber';
 import InputPassword from './components/Forms/InputPassword';
 import InputText from './components/Forms/InputText';
 import Radio from './components/Forms/Radio';
+import InputPhone from './components/Forms/InputPhone';
 /* Masks */
 import Masks from './components/Forms/masks/Masks';
 import HR from './components/HR';
@@ -62,4 +63,5 @@ export {
   RadioGroup,
   ToastMessage,
   Radio,
+  InputPhone,
 };
