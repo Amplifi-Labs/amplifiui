@@ -26,6 +26,8 @@ type Props = {
   icon?: string;
   keyboardType?: KeyboardTypeOptions;
   onBlur?: (e: NativeSyntheticEvent<TextInputFocusEventData>) => void;
+  required?: boolean;
+  requiredStyle?: Style;
 } & MaskInputProps;
 
 const InputText = ({
@@ -52,6 +54,8 @@ const InputText = ({
   placeholderFillCharacter,
   obfuscationCharacter,
   onBlur,
+  required = false,
+  requiredStyle,
 }: Props): JSX.Element => {
   const defaultLabelStyle = tw.style('text-sm font-medium text-gray-700');
   const defaultInputStyle = tw.style(
@@ -71,10 +75,17 @@ const InputText = ({
 
   const typeHelperStyle = helperType ? tw`text-${helperType}-700` : tw``;
 
+  const defaultRequiredStyle = tw`ml-1 text-red-400 text-md`;
+
   return (
     <View style={style}>
       {label && (
-        <Text style={{...defaultLabelStyle, ...labelStyle}}>{label}</Text>
+          <View style={tw`flex-row`}>
+            <Text style={{...defaultLabelStyle, ...labelStyle}}>{label}</Text>
+            {required && (
+              <Text style={{...defaultRequiredStyle, ...requiredStyle}}>*</Text>
+            )}
+          </View>
       )}
       <View>
         <InputMask
