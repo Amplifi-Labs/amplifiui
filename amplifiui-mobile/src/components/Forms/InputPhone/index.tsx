@@ -8,7 +8,6 @@ import type { MaskInputProps } from '../masks/InputMask.types';
 import Formats from './formats';
 import ChevronIcon from './chevron-icon';
 import {Picker} from '@react-native-picker/picker';
-import { ChangeEvent } from 'react';
 
 let to: ReturnType<typeof setTimeout>;
 
@@ -23,7 +22,7 @@ type Props = {
   placeholderStyle?: Style;
   iconStyle?: Style;
   helperStyle?: Style;
-  onChangeText: (text: string | ChangeEvent<any>) => void;
+  // onChangeText: (text: string | ChangeEvent<any>) => void;
   value: string;
   inputType?: 'primary' | 'secondary';
   helperType?: 'primary' | 'secondary';

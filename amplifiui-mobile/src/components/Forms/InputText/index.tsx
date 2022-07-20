@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { ChangeEvent } from 'react';
 import { KeyboardTypeOptions, NativeSyntheticEvent, Text, TextInputFocusEventData, View } from 'react-native';
 import { SvgXml } from 'react-native-svg';
 import { TailwindFn } from 'twrnc';
@@ -18,7 +17,6 @@ type Props = {
   placeholderStyle?: Style;
   iconStyle?: Style;
   helperStyle?: Style;
-  onChangeText: (text: string | ChangeEvent<any>) => void;
   value: string;
   inputType?: 'primary' | 'secondary';
   helperType?: 'primary' | 'secondary';
