@@ -40,7 +40,7 @@ const Radio = ({
   );
 
   const defaultTouchableAreaStyle = tw.style(
-    'flex-row w-[48px] h-[48px] justify-center z-100 overflow-y-hidden'
+    'flex-row w-[48px] h-[48px] justify-center z-100 overflow-hidden'
   );
 
   const defaultRadioStyleChecked = tw.style(
