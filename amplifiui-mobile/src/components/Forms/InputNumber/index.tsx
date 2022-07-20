@@ -75,7 +75,7 @@ const InputNumber = ({
 
   const typeHelperStyle = helperType ? tw`text-${helperType}-700` : tw``;
 
-  const defaultRequiredStyle = tw`ml-1 text-red-400 text-md`;
+  const defaultRequiredStyle = tw`ml-1 text-red-400 text-xs`;
 
   return (
     <View style={style}>
