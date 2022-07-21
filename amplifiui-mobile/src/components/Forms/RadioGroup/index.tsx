@@ -6,13 +6,13 @@ import { Style } from 'twrnc/dist/esm/types';
 type Props = {
   tw: TailwindFn;
   label?: string;
-  data: Array<{label: string; key: string | number}>;
+  data: Array<{label: string; key: number}>;
   showRadio?: Boolean;
   style?: Style;
   labelStyle?: Style;
   dataStyle?: Style;
   radioStyle?: Style;
-  onChangeOption: React.Dispatch<React.SetStateAction<Object>>;
+  onChangeOption: React.Dispatch<React.SetStateAction<Object>> | ((obj: {key: number, label: string}) => void);
   value?: string | number;
   isHorizontal?: boolean;
 };
@@ -32,10 +32,10 @@ const RadioGroup = ({
 }: Props): JSX.Element => {
   const [selectedValue, setSelectedValue] = React.useState<{
     label: string;
-    key: string | number;
+    key: number;
   }>({
     label: '',
-    key: '',
+    key: 0,
   });
   const defaultLabelStyle = tw.style('text-sm font-medium text-gray-700');
   const defaultDataStyle = tw.style(
@@ -55,10 +55,12 @@ const RadioGroup = ({
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  const isSelected = (item: {label: string; key: string | number}) => {
+
+  const isSelected = (item: {label: string; key: number}) => {
     return item.key === selectedValue.key;
   };
-  const updateValue = (newValue: {label: string; key: string | number}) => {
+
+  const updateValue = (newValue: {label: string; key: number}) => {
     setSelectedValue(newValue);
     onChangeOption(newValue);
   };
