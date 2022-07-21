@@ -20,7 +20,7 @@ type Props = {
   children: JSX.Element | JSX.Element[];
   maxHeight: number;
   show: boolean;
-  setShow: React.Dispatch<React.SetStateAction<boolean>>;
+  setShow: React.Dispatch<React.SetStateAction<boolean>> | ((v: boolean) => void);
 };
 
 let ref: Animated.LegacyRef<View>;
