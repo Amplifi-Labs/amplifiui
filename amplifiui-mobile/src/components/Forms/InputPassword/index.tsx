@@ -107,10 +107,12 @@ const InputPassword: React.FC<Props> = ({
           }}
           onChangeText={(e) => {
             if (!securePasswordVisible) {
-              if (e.length > value.length) {
-                const c = e.toString().replace(/[•]/g,'');
+              const c = e.toString().replace(/[•]/g,'');
+              if (e.length - value.length > 1) {
+                onChangeText(c);
+              } else if (e.length - value.length > 0) {
                 onChangeText(value+c);
-              } else {
+              } else { // Runs when hitting backspace
                 onChangeText(value.substring(0, value.length-1));
               }
             } else {
