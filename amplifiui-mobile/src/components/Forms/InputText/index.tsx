@@ -27,6 +27,7 @@ type Props = {
   onBlur?: (e: NativeSyntheticEvent<TextInputFocusEventData>) => void;
   required?: boolean;
   requiredStyle?: Style;
+  editable?: boolean;
 } & MaskInputProps;
 
 const InputText = ({
@@ -55,6 +56,7 @@ const InputText = ({
   onBlur,
   required = false,
   requiredStyle,
+  editable = true,
 }: Props): JSX.Element => {
   const defaultLabelStyle = tw.style('text-sm font-medium text-gray-700');
   const defaultInputStyle = tw.style(
@@ -100,6 +102,7 @@ const InputText = ({
           placeholderFillCharacter={placeholderFillCharacter}
           obfuscationCharacter={obfuscationCharacter}
           onBlur={onBlur}
+          editable={editable}
         />
         {icon && (
           <View style={{...defaultIconStyle, ...iconStyle}}>
