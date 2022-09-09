@@ -18,6 +18,7 @@ type Props = {
   iconStyle?: Style;
   helperStyle?: Style;
   value: string;
+  valueStyle?: Style;
   inputType?: 'primary' | 'secondary';
   helperType?: 'primary' | 'secondary';
   error?: string;
@@ -28,6 +29,8 @@ type Props = {
   required?: boolean;
   requiredStyle?: Style;
   editable?: boolean;
+  multiline?: boolean;
+  numberOfLines?: number;
 } & MaskInputProps;
 
 const InputText = ({
@@ -43,6 +46,7 @@ const InputText = ({
   helperStyle,
   onChangeText,
   value,
+  valueStyle,
   inputType,
   helperType,
   error,
@@ -57,6 +61,8 @@ const InputText = ({
   required = false,
   requiredStyle,
   editable = true,
+  multiline = false,
+  numberOfLines = 4,
 }: Props): JSX.Element => {
   const defaultLabelStyle = tw.style('text-sm font-medium text-gray-700');
   const defaultInputStyle = tw.style(
@@ -103,6 +109,9 @@ const InputText = ({
           obfuscationCharacter={obfuscationCharacter}
           onBlur={onBlur}
           editable={editable}
+          multiline={multiline}
+          numberOfLines={numberOfLines}
+          valueStyle={valueStyle}
         />
         {icon && (
           <View style={{...defaultIconStyle, ...iconStyle}}>

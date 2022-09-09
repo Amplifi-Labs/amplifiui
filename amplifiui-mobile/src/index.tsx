@@ -2,6 +2,7 @@ import AppStatusBar from './components/AppStatusBar';
 import BackgroundImage from './components/BackgroundImage';
 import Button from './components/Button';
 import Card from './components/Card';
+import FadedScrollView from './components/FadedScrollView';
 /* Charts */
 import VerticalBars from './components/Charts/VerticalBars';
 import CollapsibleModal from './components/CollapsibleModal';
@@ -64,4 +65,5 @@ export {
   ToastMessage,
   Radio,
   InputPhone,
+  FadedScrollView,
 };

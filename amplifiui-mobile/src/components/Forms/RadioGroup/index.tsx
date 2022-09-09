@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
-import { TailwindFn } from 'twrnc';
-import { Style } from 'twrnc/dist/esm/types';
+import {ScrollView, Text, TouchableOpacity, View} from 'react-native';
+import {TailwindFn} from 'twrnc';
+import {Style} from 'twrnc/dist/esm/types';
 
 type Props = {
   tw: TailwindFn;
@@ -12,9 +12,13 @@ type Props = {
   labelStyle?: Style;
   dataStyle?: Style;
   radioStyle?: Style;
-  onChangeOption: React.Dispatch<React.SetStateAction<Object>> | ((obj: {key: number, label: string}) => void);
+  onChangeOption:
+    | React.Dispatch<React.SetStateAction<Object>>
+    | ((obj: {key: number; label: string}) => void);
   value?: string | number;
   isHorizontal?: boolean;
+  textStyle?: Style;
+  disabled?: boolean;
 };
 
 const RadioGroup = ({
@@ -29,6 +33,8 @@ const RadioGroup = ({
   isHorizontal,
   value,
   style,
+  textStyle,
+  disabled = false,
 }: Props): JSX.Element => {
   const [selectedValue, setSelectedValue] = React.useState<{
     label: string;
@@ -54,7 +60,7 @@ const RadioGroup = ({
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [value]);
 
   const isSelected = (item: {label: string; key: number}) => {
     return item.key === selectedValue.key;
@@ -67,6 +73,7 @@ const RadioGroup = ({
 
   const horizontalStyle = isHorizontal ? tw.style('flex-row') : '';
   const verticalStyleButton = isHorizontal ? tw.style('p-2 w-50') : '';
+  const defaultSelectedStyle = 'border-2 border-primary-700 bg-gray-100';
 
   return (
     <View style={style}>
@@ -86,16 +93,19 @@ const RadioGroup = ({
                 style={{
                   ...defaultDataStyle,
                   ...dataStyle,
-                  ...tw.style(
-                    isSelected(item) &&
-                      'border-2 border-primary-700 bg-gray-100',
-                  ),
+                  ...tw.style(isSelected(item) && defaultSelectedStyle),
                 }}
-                onPress={() => updateValue(item)}
+                onPress={() => {
+                  if (!disabled) {
+                    updateValue(item);
+                  }
+                }}
                 activeOpacity={1}
                 accessible={true}
                 accessibilityLabel={item.label}>
-                <Text style={{...defaultTextStyle}}>{item.label}</Text>
+                <Text style={{...defaultTextStyle, ...textStyle}}>
+                  {item.label}
+                </Text>
                 {showRadio && isSelected(item) && (
                   <View style={{...defaultRadioStyle, ...radioStyle}} />
                 )}
