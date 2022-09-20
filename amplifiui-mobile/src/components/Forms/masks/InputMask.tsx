@@ -11,7 +11,7 @@ export default React.forwardRef(function (
   const {
     mask,
     value,
-    valueStyle,
+    style,
     onChangeText,
     placeholderFillCharacter = '_',
     obfuscationCharacter,
@@ -31,7 +31,13 @@ export default React.forwardRef(function (
   );
 
   const formattedValueResult = React.useMemo(() => {
-    return formatWithMask({text: value || '', mask, obfuscationCharacter});
+    const result = formatWithMask({
+      text: value || '',
+      mask,
+      obfuscationCharacter,
+    });
+
+    return result;
   }, [mask, obfuscationCharacter, value]);
 
   const maskHasObfuscation = React.useMemo(
@@ -94,11 +100,12 @@ export default React.forwardRef(function (
   const inputValue = isValueObfuscated
     ? formattedValueResult.obfuscated
     : formattedValueResult.masked;
+  console.log('inputValue:', inputValue);
 
   return (
     <TextInput
       {...rest}
-      // value={inputValue}
+      value={inputValue}
       selection={
         isValueObfuscated
           ? {start: inputValue.length, end: inputValue.length}
@@ -108,21 +115,17 @@ export default React.forwardRef(function (
       ref={ref}
       onFocus={() => setFocused(true)}
       onBlur={() => setFocused(false)}
-    >
+      style={{
+        ...tw`text-gray-500 font-normal`,
+        ...style,
+      }}>
       {!isFocused && !value && (
-        <Text style={{
-          ...tw`text-gray-500 font-normal`,
-          ...placeholderStyle
-        }}>
+        <Text
+          style={{
+            ...tw`text-gray-500 font-normal`,
+            ...placeholderStyle,
+          }}>
           {defaultPlaceholder}
-        </Text>
-      )}
-      {!!value && (
-        <Text style={{
-          ...tw`text-gray-500 font-normal`,
-          ...valueStyle
-        }}>
-          {inputValue}
         </Text>
       )}
     </TextInput>
