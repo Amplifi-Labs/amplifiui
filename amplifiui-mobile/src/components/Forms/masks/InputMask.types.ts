@@ -32,5 +32,5 @@ export interface MaskInputProps extends Omit<TextInputProps, 'onChangeText'> {
 
   placeholderStyle?: Style;
 
-  valueStyle?: Style;
+  style?: Style;
 }

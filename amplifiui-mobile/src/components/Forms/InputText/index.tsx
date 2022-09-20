@@ -18,7 +18,6 @@ type Props = {
   iconStyle?: Style;
   helperStyle?: Style;
   value: string;
-  valueStyle?: Style;
   inputType?: 'primary' | 'secondary';
   helperType?: 'primary' | 'secondary';
   error?: string;
@@ -46,7 +45,6 @@ const InputText = ({
   helperStyle,
   onChangeText,
   value,
-  valueStyle,
   inputType,
   helperType,
   error,
@@ -111,7 +109,6 @@ const InputText = ({
           editable={editable}
           multiline={multiline}
           numberOfLines={numberOfLines}
-          valueStyle={valueStyle}
         />
         {icon && (
           <View style={{...defaultIconStyle, ...iconStyle}}>
