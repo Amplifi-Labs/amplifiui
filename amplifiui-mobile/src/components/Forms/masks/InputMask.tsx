@@ -105,7 +105,7 @@ export default React.forwardRef(function (
   return (
     <TextInput
       {...rest}
-      value={inputValue}
+      value={inputValue || undefined}
       selection={
         isValueObfuscated
           ? {start: inputValue.length, end: inputValue.length}
@@ -119,7 +119,7 @@ export default React.forwardRef(function (
         ...tw`text-gray-500 font-normal`,
         ...style,
       }}>
-      {!isFocused && !value && (
+      {!isFocused && !inputValue && (
         <Text
           style={{
             ...tw`text-gray-500 font-normal`,
