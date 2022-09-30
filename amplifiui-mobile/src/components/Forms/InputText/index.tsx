@@ -30,6 +30,7 @@ type Props = {
   editable?: boolean;
   multiline?: boolean;
   numberOfLines?: number;
+  placeholderTextColor?: string;
 } & MaskInputProps;
 
 const InputText = ({
@@ -61,6 +62,7 @@ const InputText = ({
   editable = true,
   multiline = false,
   numberOfLines = 4,
+  placeholderTextColor,
 }: Props): JSX.Element => {
   const defaultLabelStyle = tw.style('text-sm font-medium text-gray-700');
   const defaultInputStyle = tw.style(
@@ -109,6 +111,7 @@ const InputText = ({
           editable={editable}
           multiline={multiline}
           numberOfLines={numberOfLines}
+          placeholderTextColor={placeholderTextColor}
         />
         {icon && (
           <View style={{...defaultIconStyle, ...iconStyle}}>

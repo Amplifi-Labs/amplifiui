@@ -28,6 +28,7 @@ type Props = {
   onBlur?: (e: NativeSyntheticEvent<TextInputFocusEventData>) => void;
   required?: boolean;
   requiredStyle?: Style;
+  placeholderTextColor?: string;
 } & MaskInputProps;
 
 const InputNumber = ({
@@ -56,6 +57,7 @@ const InputNumber = ({
   onBlur,
   required = false,
   requiredStyle,
+  placeholderTextColor,
 }: Props): JSX.Element => {
   const defaultLabelStyle = tw.style('text-sm font-medium text-gray-700');
   const defaultInputStyle = tw.style(
@@ -101,6 +103,7 @@ const InputNumber = ({
           placeholderFillCharacter={placeholderFillCharacter}
           obfuscationCharacter={obfuscationCharacter}
           onBlur={onBlur}
+          placeholderTextColor={placeholderTextColor}
         />
         {icon && (
           <View style={{...defaultIconStyle, ...iconStyle}}>

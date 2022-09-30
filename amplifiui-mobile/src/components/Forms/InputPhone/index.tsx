@@ -34,6 +34,7 @@ type Props = {
   required?: boolean;
   requiredStyle?: Style;
   defaultCountry?: 'US' | 'BR';
+  placeholderTextColor?: string;
 } & MaskInputProps;
 
 const InputPhone = ({
@@ -62,6 +63,7 @@ const InputPhone = ({
   required = false,
   requiredStyle,
   defaultCountry = 'US',
+  placeholderTextColor,
 }: Props): JSX.Element => {
   const [selectedCountry, setSelectedCountry] = React.useState(defaultCountry);
   const [selectedMask, setSelectedMask] = React.useState<(string | RegExp)[]>();
@@ -125,6 +127,7 @@ const InputPhone = ({
           placeholderFillCharacter={placeholderFillCharacter}
           obfuscationCharacter={obfuscationCharacter}
           onBlur={onBlur}
+          placeholderTextColor={placeholderTextColor}
         />
         {icon && (
           <View style={{...defaultIconStyle, ...iconStyle}}>
