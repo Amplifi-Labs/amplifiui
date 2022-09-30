@@ -22,6 +22,8 @@ type Props = {
   placeholderStyle?: Style;
   helperStyle?: Style;
   iconStyle?: Style;
+  iconWidth?: number;
+  iconHeight?: number;
   onChangeText: (text: string) => void;
   value: string;
   inputType?: 'primary' | 'secondary';
@@ -44,6 +46,8 @@ const InputPassword: React.FC<Props> = ({
   placeholderStyle,
   helperStyle,
   iconStyle,
+  iconWidth,
+  iconHeight,
   onChangeText,
   value,
   inputType,
@@ -151,7 +155,11 @@ const InputPassword: React.FC<Props> = ({
           }}
           onPress={() => setVisible(!visible)}
         >
-          <SvgXml xml={visible ? visibleIcon : invisibleIcon} />
+          {(iconWidth || iconHeight) ? (
+            <SvgXml xml={visible ? visibleIcon : invisibleIcon} width={iconWidth} height={iconHeight} />
+          ) : (
+            <SvgXml xml={visible ? visibleIcon : invisibleIcon} />
+          )}
         </TouchableOpacity>
       </View>
       {helper && !error && (

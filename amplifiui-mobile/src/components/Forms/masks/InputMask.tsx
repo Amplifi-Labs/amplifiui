@@ -100,7 +100,6 @@ export default React.forwardRef(function (
   const inputValue = isValueObfuscated
     ? formattedValueResult.obfuscated
     : formattedValueResult.masked;
-  console.log('inputValue:', inputValue);
 
   return (
     <TextInput
