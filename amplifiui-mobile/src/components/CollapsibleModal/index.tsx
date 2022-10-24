@@ -5,11 +5,11 @@ import {
   PanResponder,
   PanResponderGestureState,
   TouchableWithoutFeedback,
-  View
+  View,
 } from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { TailwindFn } from 'twrnc';
-
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import {TailwindFn} from 'twrnc';
+import {Style} from 'twrnc/dist/esm/types';
 
 const WINDOW_HEIGHT = Dimensions.get('window').height;
 
@@ -18,9 +18,13 @@ const duration = 1000;
 type Props = {
   tw: TailwindFn;
   children: JSX.Element | JSX.Element[];
-  maxHeight: number;
+  maxHeight?: number;
   show: boolean;
-  setShow: React.Dispatch<React.SetStateAction<boolean>> | ((v: boolean) => void);
+  setShow:
+    | React.Dispatch<React.SetStateAction<boolean>>
+    | ((v: boolean) => void);
+  style?: Style;
+  containerStyle?: Style;
 };
 
 let ref: Animated.LegacyRef<View>;
@@ -31,6 +35,8 @@ const DraggableView = ({
   maxHeight,
   show,
   setShow,
+  style,
+  containerStyle,
 }: Props): JSX.Element => {
   const insets = useSafeAreaInsets();
 
@@ -42,18 +48,20 @@ const DraggableView = ({
 
   const [opacity, setOpacity] = React.useState(0);
 
+  const [maxHeight_, setMaxHeight_] = React.useState(maxHeight);
+
   const positionToTop = (position_: number) => {
-    return WINDOW_HEIGHT - (position_ / 100) * maxHeight;
+    return WINDOW_HEIGHT - (position_ / 100) * (maxHeight_ || 0);
   };
 
   const topToPosition = (top_: number) => {
-    return (100 * (WINDOW_HEIGHT - top_)) / maxHeight;
+    return (100 * (WINDOW_HEIGHT - top_)) / (maxHeight_ || 0);
   };
 
   React.useEffect(() => {
     setTop(positionToTop(position));
     setOpacity(position * 0.8);
-  }, [position]);
+  }, [position, maxHeight_]);
 
   React.useEffect(() => {
     startAnimation();
@@ -126,9 +134,18 @@ const DraggableView = ({
             style={{
               ...tw`absolute left-0 w-full rounded-t-2xl bg-white h-full shadow-2xl`,
               top: top,
+              ...containerStyle,
             }}
             {..._panGesture.panHandlers}>
-            <View>
+            <View
+              onLayout={e => {
+                if (!maxHeight) {
+                  setMaxHeight_(
+                    Math.ceil(e.nativeEvent.layout.height + insets.bottom + 46),
+                  );
+                }
+              }}
+              style={style}>
               <TouchableWithoutFeedback
                 onPressIn={() => setTouched(true)}
                 onPressOut={() => setTouched(false)}>
