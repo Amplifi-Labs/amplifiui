@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {useState} from 'react';
-import {KeyboardTypeOptions, Text, View} from 'react-native';
+import {KeyboardTypeOptions, NativeSyntheticEvent, Text, TextInputFocusEventData, View} from 'react-native';
 import {SvgXml} from 'react-native-svg';
 import {TailwindFn} from 'twrnc';
 import {Style} from 'twrnc/dist/esm/types';
@@ -18,7 +18,6 @@ type Props = {
   placeholderStyle?: Style;
   iconStyle?: Style;
   helperStyle?: Style;
-  // onChangeText: (text: string | ChangeEvent<any>) => void;
   value: string;
   inputType?: 'primary' | 'secondary';
   helperType?: 'primary' | 'secondary';
@@ -30,6 +29,7 @@ type Props = {
   requiredStyle?: Style;
   placeholderTextColor?: string;
   onFocusBorderColor?: Style;
+  onBlur?: (e: NativeSyntheticEvent<TextInputFocusEventData>) => void;
 } & MaskInputProps;
 
 const InputNumber = ({
@@ -59,9 +59,10 @@ const InputNumber = ({
   requiredStyle,
   placeholderTextColor,
   onFocusBorderColor,
+  onBlur,
 }: Props): JSX.Element => {
   const [onFocus, setOnFocus] = useState(false);
-  const [onBlur, setOnBlur] = useState(false);
+  const [onBlurState, setOnBlurState] = useState(false);
 
   const defaultLabelStyle = tw.style('text-sm font-medium text-gray-700');
   const defaultInputStyle = tw.style(
@@ -83,23 +84,21 @@ const InputNumber = ({
 
   const defaultRequiredStyle = tw`ml-1 text-red-400 text-xs`;
 
-  const messageError = error ?? <Text>Required Field</Text>;
-
   const changeColorBorderOnFocus = () => {
-    setOnBlur(false);
+    setOnBlurState(false);
     setOnFocus(true);
   };
 
   const changeColorBorderOnBlur = () => {
     setOnFocus(false);
-    setOnBlur(true);
+    setOnBlurState(true);
   };
 
   const onFocusBorderStyleColor = onFocus
     ? onFocusBorderColor ?? tw`border-light-blue-700`
     : tw``;
-  const onBlurBorderColor = onBlur && required ? tw`border-red-500` : tw``;
-  const onBlurColor = onBlur && required ? tw`text-red-500` : tw``;
+  const onBlurBorderColor = onBlurState && required ? tw`border-red-500` : tw``;
+  const onBlurColor = onBlurState && required ? tw`text-red-500` : tw``;
   const onFocusColor = onFocus ? tw`text-light-blue-700` : tw``;
 
   return (
@@ -140,7 +139,13 @@ const InputNumber = ({
           placeholderFillCharacter={placeholderFillCharacter}
           obfuscationCharacter={obfuscationCharacter}
           onFocus={changeColorBorderOnFocus}
-          onBlur={changeColorBorderOnBlur}
+          onBlur={(e) => {
+            changeColorBorderOnBlur();
+
+            if (onBlur) {
+              onBlur(e);
+            }
+          }}
           placeholderTextColor={placeholderTextColor}
         />
         {icon && (
@@ -155,9 +160,9 @@ const InputNumber = ({
           {helper}
         </Text>
       )}
-      {onBlur && required && (
+      {error && (
         <Text style={{...defaultErrorStyle, ...errorStyle}}>
-          {messageError}
+          {error}
         </Text>
       )}
     </View>

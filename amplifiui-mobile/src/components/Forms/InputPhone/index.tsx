@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {KeyboardTypeOptions, Text, View, TouchableOpacity} from 'react-native';
+import {KeyboardTypeOptions, Text, View, TouchableOpacity, NativeSyntheticEvent, TextInputFocusEventData} from 'react-native';
 import {SvgXml} from 'react-native-svg';
 import {TailwindFn} from 'twrnc';
 import {Style} from 'twrnc/dist/esm/types';
@@ -23,7 +23,6 @@ type Props = {
   placeholderStyle?: Style;
   iconStyle?: Style;
   helperStyle?: Style;
-  // onChangeText: (text: string | ChangeEvent<any>) => void;
   value: string;
   inputType?: 'primary' | 'secondary';
   helperType?: 'primary' | 'secondary';
@@ -36,6 +35,7 @@ type Props = {
   defaultCountry?: 'US' | 'BR';
   placeholderTextColor?: string;
   onFocusBorderColor?: Style;
+  onBlur?: (e: NativeSyntheticEvent<TextInputFocusEventData>) => void;
 } & MaskInputProps;
 
 const InputPhone = ({
@@ -65,12 +65,13 @@ const InputPhone = ({
   defaultCountry = 'US',
   placeholderTextColor,
   onFocusBorderColor,
+  onBlur,
 }: Props): JSX.Element => {
   const [selectedCountry, setSelectedCountry] = React.useState(defaultCountry);
   const [selectedMask, setSelectedMask] = React.useState<(string | RegExp)[]>();
   const [showPicker, setShowPicker] = React.useState(false);
   const [onFocus, setOnFocus] = useState(false);
-  const [onBlur, setOnBlur] = useState(false);
+  const [onBlurState, setOnBlurState] = useState(false);
 
   const defaultLabelStyle = tw.style('text-sm font-medium text-gray-700');
   const defaultInputStyle = tw.style(
@@ -106,24 +107,23 @@ const InputPhone = ({
     }, 5000);
   }, [selectedCountry]);
 
-  const messageError = error ?? <Text>Required Field</Text>;
-
   const changeColorBorderOnFocus = () => {
-    setOnBlur(false);
+    setOnBlurState(false);
     setOnFocus(true);
   };
 
   const changeColorBorderOnBlur = () => {
     setOnFocus(false);
-    setOnBlur(true);
+    setOnBlurState(true);
   };
 
   const onFocusBorderStyleColor = onFocus
     ? onFocusBorderColor ?? tw`border-light-blue-700`
     : tw``;
+
   const onFocusColor = onFocus ? tw`text-light-blue-700` : tw``;
-  const onBlurBorderColor = onBlur && required ? tw`border-red-500` : tw``;
-  const onBlurColor = onBlur && required ? tw`text-red-500` : tw``;
+  const onBlurBorderColor = onBlurState && required ? tw`border-red-500` : tw``;
+  const onBlurColor = onBlurState && required ? tw`text-red-500` : tw``;
 
   return (
     <View style={style}>
@@ -164,7 +164,13 @@ const InputPhone = ({
           placeholderFillCharacter={placeholderFillCharacter}
           obfuscationCharacter={obfuscationCharacter}
           onFocus={changeColorBorderOnFocus}
-          onBlur={changeColorBorderOnBlur}
+          onBlur={(e) => {
+            changeColorBorderOnBlur();
+
+            if (onBlur) {
+              onBlur(e);
+            }
+          }}
           placeholderTextColor={placeholderTextColor}
         />
         {icon && (
@@ -189,9 +195,9 @@ const InputPhone = ({
           {helper}
         </Text>
       )}
-      {onBlur && required && (
+      {error && (
         <Text style={{...defaultErrorStyle, ...errorStyle}}>
-          {messageError}
+          {error}
         </Text>
       )}
       {showPicker && (

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {useState} from 'react';
-import {Text, TextInput, View, TouchableOpacity} from 'react-native';
+import {Text, TextInput, View, TouchableOpacity, NativeSyntheticEvent, TextInputFocusEventData} from 'react-native';
 import {SvgXml} from 'react-native-svg';
 import {TailwindFn} from 'twrnc';
 import {Style} from 'twrnc/dist/esm/types';
@@ -25,6 +25,7 @@ type Props = {
   error?: string;
   errorStyle?: Style;
   onFocusBorderColor?: Style;
+  onBlur?: (e: NativeSyntheticEvent<TextInputFocusEventData>) => void;
 };
 
 const InputPassword: React.FC<Props> = ({
@@ -47,6 +48,7 @@ const InputPassword: React.FC<Props> = ({
   error,
   errorStyle,
   onFocusBorderColor,
+  onBlur,
 }): JSX.Element => {
   const [visible, setVisible] = React.useState(false);
 
@@ -54,7 +56,7 @@ const InputPassword: React.FC<Props> = ({
     React.useState(true);
 
   const [onFocus, setOnFocus] = useState(false);
-  const [onBlur, setOnBlur] = useState(false);
+  const [onBlurState, setOnBlurState] = useState(false);
 
   React.useEffect(() => {
     const condition1 =
@@ -86,19 +88,18 @@ const InputPassword: React.FC<Props> = ({
     : tw`min-h-12`;
 
   const typeHelperStyle = helperType ? tw`text-${helperType}-700` : tw``;
-  const messageError = error ?? <Text>Required Field</Text>;
 
   const changeColorBorderOnFocus = () => {
-    setOnBlur(false);
+    setOnBlurState(false);
     setOnFocus(true);
   };
 
   const changeColorBorderOnBlur = () => {
     setOnFocus(false);
-    setOnBlur(true);
+    setOnBlurState(true);
   };
 
-  const onBlurColor = onBlur ? tw`text-red-500` : tw``;
+  const onBlurColor = onBlurState ? tw`text-red-500` : tw``;
   const onFocusBorderStyleColor = onFocus
     ? onFocusBorderColor ?? tw`text-light-blue-700`
     : tw``;
@@ -142,7 +143,13 @@ const InputPassword: React.FC<Props> = ({
             }
           }}
           onFocus={changeColorBorderOnFocus}
-          onBlur={changeColorBorderOnBlur}>
+          onBlur={(e) => {
+            changeColorBorderOnBlur();
+
+            if (onBlur) {
+              onBlur(e);
+            }
+          }}>
           <>
             {!onFocus && !!placeholder && !value && (
               <Text
@@ -181,13 +188,13 @@ const InputPassword: React.FC<Props> = ({
           {helper}
         </Text>
       )}
-      {onBlur && (
+      {error && (
         <Text
           style={{
             ...defaultErrorStyle,
             ...errorStyle,
           }}>
-          {messageError}
+          {error}
         </Text>
       )}
     </View>

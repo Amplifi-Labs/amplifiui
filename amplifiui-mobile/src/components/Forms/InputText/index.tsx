@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {useState} from 'react';
-import {KeyboardTypeOptions, Text, View} from 'react-native';
+import {KeyboardTypeOptions, NativeSyntheticEvent, Text, TextInputFocusEventData, View} from 'react-native';
 import {SvgXml} from 'react-native-svg';
 import {TailwindFn} from 'twrnc';
 import {Style} from 'twrnc/dist/esm/types';
@@ -32,6 +32,7 @@ type Props = {
   numberOfLines?: number;
   placeholderTextColor?: string;
   onFocusBorderColor?: Style;
+  onBlur?: (e: NativeSyntheticEvent<TextInputFocusEventData>) => void;
 } & MaskInputProps;
 
 const InputText = ({
@@ -64,9 +65,10 @@ const InputText = ({
   numberOfLines = 4,
   placeholderTextColor,
   onFocusBorderColor,
+  onBlur,
 }: Props): JSX.Element => {
   const [onFocus, setOnFocus] = useState(false);
-  const [onBlur, setOnBlur] = useState(false);
+  const [onBlurState, setOnBlurState] = useState(false);
   const defaultLabelStyle = tw.style('text-sm font-medium text-gray-700');
   const defaultInputStyle = tw.style(
     'text-sm font-normal text-gray-500 p-3 bg-white rounded-md border-gray-300 border',
@@ -87,24 +89,22 @@ const InputText = ({
 
   const defaultRequiredStyle = tw`ml-1 text-red-400 text-xs`;
 
-  const messageError = error ?? <Text>Required Field</Text>;
-
   const changeColorBorderOnFocus = () => {
-    setOnBlur(false);
+    setOnBlurState(false);
     setOnFocus(true);
   };
 
   const changeColorBorderOnBlur = () => {
     setOnFocus(false);
-    setOnBlur(true);
+    setOnBlurState(true);
   };
 
   const onFocusBorderStyleColor = onFocus
     ? onFocusBorderColor ?? tw`border-light-blue-700`
     : tw``;
   const onFocusColor = onFocus ? tw`text-light-blue-700` : tw``;
-  const onBlurBorderColor = onBlur && required ? tw`border-red-500` : tw``;
-  const onBlurColor = onBlur && required ? tw`text-red-500` : tw``;
+  const onBlurBorderColor = onBlurState && required ? tw`border-red-500` : tw``;
+  const onBlurColor = onBlurState && required ? tw`text-red-500` : tw``;
 
   return (
     <View style={style}>
@@ -144,7 +144,13 @@ const InputText = ({
           placeholderFillCharacter={placeholderFillCharacter}
           obfuscationCharacter={obfuscationCharacter}
           onFocus={changeColorBorderOnFocus}
-          onBlur={changeColorBorderOnBlur}
+          onBlur={(e) => {
+            changeColorBorderOnBlur();
+
+            if (onBlur) {
+              onBlur(e);
+            }
+          }}
           editable={editable}
           multiline={multiline}
           numberOfLines={numberOfLines}
@@ -162,9 +168,9 @@ const InputText = ({
           {helper}
         </Text>
       )}
-      {onBlur && required && (
+      {error && (
         <Text style={{...defaultErrorStyle, ...errorStyle}}>
-          {messageError}
+          {error}
         </Text>
       )}
     </View>
