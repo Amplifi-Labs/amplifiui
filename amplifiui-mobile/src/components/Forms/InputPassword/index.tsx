@@ -56,7 +56,6 @@ const InputPassword: React.FC<Props> = ({
     React.useState(true);
 
   const [onFocus, setOnFocus] = useState(false);
-  const [onBlurState, setOnBlurState] = useState(false);
 
   React.useEffect(() => {
     const condition1 =
@@ -90,16 +89,14 @@ const InputPassword: React.FC<Props> = ({
   const typeHelperStyle = helperType ? tw`text-${helperType}-700` : tw``;
 
   const changeColorBorderOnFocus = () => {
-    setOnBlurState(false);
     setOnFocus(true);
   };
 
   const changeColorBorderOnBlur = () => {
     setOnFocus(false);
-    setOnBlurState(true);
   };
 
-  const onBlurColor = onBlurState ? tw`text-red-500` : tw``;
+  const onBlurColor = error ? tw`text-red-500` : tw``;
   const onFocusBorderStyleColor = onFocus
     ? onFocusBorderColor ?? tw`text-light-blue-700`
     : tw``;

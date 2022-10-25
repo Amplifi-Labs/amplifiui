@@ -62,7 +62,6 @@ const InputNumber = ({
   onBlur,
 }: Props): JSX.Element => {
   const [onFocus, setOnFocus] = useState(false);
-  const [onBlurState, setOnBlurState] = useState(false);
 
   const defaultLabelStyle = tw.style('text-sm font-medium text-gray-700');
   const defaultInputStyle = tw.style(
@@ -85,20 +84,19 @@ const InputNumber = ({
   const defaultRequiredStyle = tw`ml-1 text-red-400 text-xs`;
 
   const changeColorBorderOnFocus = () => {
-    setOnBlurState(false);
     setOnFocus(true);
   };
 
   const changeColorBorderOnBlur = () => {
     setOnFocus(false);
-    setOnBlurState(true);
   };
 
   const onFocusBorderStyleColor = onFocus
     ? onFocusBorderColor ?? tw`border-light-blue-700`
     : tw``;
-  const onBlurBorderColor = onBlurState && required ? tw`border-red-500` : tw``;
-  const onBlurColor = onBlurState && required ? tw`text-red-500` : tw``;
+
+  const onBlurBorderColor = error ? tw`border-red-500` : tw``;
+  const onBlurColor = error ? tw`text-red-500` : tw``;
   const onFocusColor = onFocus ? tw`text-light-blue-700` : tw``;
 
   return (
