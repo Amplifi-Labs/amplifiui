@@ -27,7 +27,7 @@ const Balloon = ({tw, balloonData, position, style, fontStyle}: Props) => {
         }}>
         {balloonData.map((data, idx) => (
           <Text key={idx} style={{...defaultFontStyle, ...fontStyle}}>
-            {`${data.title}: ${data.value}`}
+            {`${data}`}
           </Text>
         ))}
       </View>
