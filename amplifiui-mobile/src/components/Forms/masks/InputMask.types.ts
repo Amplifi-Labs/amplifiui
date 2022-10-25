@@ -1,7 +1,7 @@
-import { ChangeEvent, Dispatch, SetStateAction } from 'react';
+import {ChangeEvent, Dispatch, SetStateAction} from 'react';
 import type {TextInputProps} from 'react-native';
-import { TailwindFn } from 'twrnc';
-import { Style } from 'twrnc/dist/esm/types';
+import {TailwindFn} from 'twrnc';
+import {Style} from 'twrnc/dist/esm/types';
 
 import type {Mask} from './formatWithMask.types';
 
@@ -26,8 +26,10 @@ export interface MaskInputProps extends Omit<TextInputProps, 'onChangeText'> {
    */
   obfuscationCharacter?: string;
 
-  onChangeText: (text: string | ChangeEvent<any>) => void | Dispatch<SetStateAction<string>>;
-  
+  onChangeText: (
+    text: string | ChangeEvent<any>,
+  ) => void | Dispatch<SetStateAction<string>>;
+
   tw: TailwindFn;
 
   placeholderStyle?: Style;

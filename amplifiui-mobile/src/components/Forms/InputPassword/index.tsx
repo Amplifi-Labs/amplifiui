@@ -1,15 +1,9 @@
 import * as React from 'react';
-import {
-  NativeSyntheticEvent,
-  Text,
-  TextInput,
-  TextInputFocusEventData,
-  View,
-  TouchableOpacity,
-} from 'react-native';
-import { SvgXml } from 'react-native-svg';
-import { TailwindFn } from 'twrnc';
-import { Style } from 'twrnc/dist/esm/types';
+import {useState} from 'react';
+import {Text, TextInput, View, TouchableOpacity} from 'react-native';
+import {SvgXml} from 'react-native-svg';
+import {TailwindFn} from 'twrnc';
+import {Style} from 'twrnc/dist/esm/types';
 
 type Props = {
   tw: TailwindFn;
@@ -22,8 +16,6 @@ type Props = {
   placeholderStyle?: Style;
   helperStyle?: Style;
   iconStyle?: Style;
-  iconWidth?: number;
-  iconHeight?: number;
   onChangeText: (text: string) => void;
   value: string;
   inputType?: 'primary' | 'secondary';
@@ -32,7 +24,7 @@ type Props = {
   visibleIcon: string;
   error?: string;
   errorStyle?: Style;
-  onBlur?: (e: NativeSyntheticEvent<TextInputFocusEventData>) => void;
+  onFocusBorderColor?: Style;
 };
 
 const InputPassword: React.FC<Props> = ({
@@ -46,8 +38,6 @@ const InputPassword: React.FC<Props> = ({
   placeholderStyle,
   helperStyle,
   iconStyle,
-  iconWidth,
-  iconHeight,
   onChangeText,
   value,
   inputType,
@@ -56,23 +46,29 @@ const InputPassword: React.FC<Props> = ({
   visibleIcon,
   error,
   errorStyle,
-  onBlur,
+  onFocusBorderColor,
 }): JSX.Element => {
   const [visible, setVisible] = React.useState(false);
 
-  const [isFocused, setFocused] = React.useState(false);
+  const [securePasswordVisible, setSecurePasswordVisible] =
+    React.useState(true);
 
-  const [securePasswordVisible, setSecurePasswordVisible] = React.useState(true);
+  const [onFocus, setOnFocus] = useState(false);
+  const [onBlur, setOnBlur] = useState(false);
 
   React.useEffect(() => {
-    const condition1 = (!visible && (value === '' || typeof value === 'undefined') );
-    const condition2 = !(!visible && (value !== '' || typeof value !== 'undefined') );
+    const condition1 =
+      !visible && (value === '' || typeof value === 'undefined');
+    const condition2 = !(
+      !visible &&
+      (value !== '' || typeof value !== 'undefined')
+    );
 
     setSecurePasswordVisible(condition1 || condition2 || visible);
   }, [visible, value]);
 
   const defaultInputStyle = tw.style(
-    'text-sm font-normal text-gray-500 p-3 bg-white rounded-md border-gray-300 border w-full'
+    'text-sm font-normal text-gray-500 p-3 bg-white rounded-md border-gray-300 border w-full',
   );
 
   const defaultLabelStyle = tw.style('text-sm font-medium text-gray-700 pb-1');
@@ -80,7 +76,7 @@ const InputPassword: React.FC<Props> = ({
   const defaultHelperStyle = tw.style('text-xs font-normal text-gray-500 pt-1');
   const defaultErrorStyle = tw.style('text-xs font-normal text-red-500 pt-1');
   const defaultIconStyle = tw.style(
-    'justify-center absolute top-0 right-0 h-full w-8'
+    'justify-center absolute top-0 right-0 h-full w-8',
   );
 
   const typeInputStyle = inputType
@@ -90,6 +86,22 @@ const InputPassword: React.FC<Props> = ({
     : tw`min-h-12`;
 
   const typeHelperStyle = helperType ? tw`text-${helperType}-700` : tw``;
+  const messageError = error ?? <Text>Required Field</Text>;
+
+  const changeColorBorderOnFocus = () => {
+    setOnBlur(false);
+    setOnFocus(true);
+  };
+
+  const changeColorBorderOnBlur = () => {
+    setOnFocus(false);
+    setOnBlur(true);
+  };
+
+  const onBlurColor = onBlur ? tw`text-red-500` : tw``;
+  const onFocusBorderStyleColor = onFocus
+    ? onFocusBorderColor ?? tw`text-light-blue-700`
+    : tw``;
 
   return (
     <View style={style}>
@@ -108,31 +120,31 @@ const InputPassword: React.FC<Props> = ({
             ...defaultInputStyle,
             ...typeInputStyle,
             ...inputStyle,
+            ...onFocusBorderStyleColor,
+            ...onBlurColor,
           }}
-          onChangeText={(e) => {
+          onChange={e => {
+            e.stopPropagation();
+            e.preventDefault();
+            const {text} = e.nativeEvent;
             if (!securePasswordVisible) {
-              const c = e.toString().replace(/[•]/g,'');
-              if (e.length - value.length > 1) {
-                onChangeText(c);
-              } else if (e.length - value.length > 0) {
-                onChangeText(value+c);
-              } else { // Runs when hitting backspace
-                onChangeText(value.substring(0, value.length-1));
+              const c = text.toString().replace(/[•]/g, '');
+              let processed: string;
+              if (c.length > 0) {
+                processed = value + c.charAt(c.length - 1);
+              } else {
+                // Runs when hitting backspace
+                processed = value.substring(0, value.length - 1);
               }
+              onChangeText(processed);
             } else {
-              onChangeText(e);
+              onChangeText(text);
             }
           }}
-          onFocus={() => setFocused(true)}
-          onBlur={(e) => {
-            if (onBlur) {
-              onBlur(e);
-            }
-
-            setFocused(false);
-          }}>
+          onFocus={changeColorBorderOnFocus}
+          onBlur={changeColorBorderOnBlur}>
           <>
-            {!isFocused && !!placeholder && !value && (
+            {!onFocus && !!placeholder && !value && (
               <Text
                 style={{
                   ...tw`text-gray-500 font-normal`,
@@ -143,7 +155,9 @@ const InputPassword: React.FC<Props> = ({
             )}
             {!!value && (
               <Text>
-                {securePasswordVisible ? value : value.toString().replace(/./g,'•')}
+                {securePasswordVisible
+                  ? value
+                  : value.toString().replace(/./g, '•')}
               </Text>
             )}
           </>
@@ -153,13 +167,8 @@ const InputPassword: React.FC<Props> = ({
             ...defaultIconStyle,
             ...iconStyle,
           }}
-          onPress={() => setVisible(!visible)}
-        >
-          {(iconWidth || iconHeight) ? (
-            <SvgXml xml={visible ? visibleIcon : invisibleIcon} width={iconWidth} height={iconHeight} />
-          ) : (
-            <SvgXml xml={visible ? visibleIcon : invisibleIcon} />
-          )}
+          onPress={() => setVisible(!visible)}>
+          <SvgXml xml={visible ? visibleIcon : invisibleIcon} />
         </TouchableOpacity>
       </View>
       {helper && !error && (
@@ -167,20 +176,18 @@ const InputPassword: React.FC<Props> = ({
           style={{
             ...defaultHelperStyle,
             ...typeHelperStyle,
-            ...helperStyle
-          }}
-        >
+            ...helperStyle,
+          }}>
           {helper}
         </Text>
       )}
-      {error && (
+      {onBlur && (
         <Text
           style={{
             ...defaultErrorStyle,
-            ...errorStyle
-          }}
-        >
-          {error}
+            ...errorStyle,
+          }}>
+          {messageError}
         </Text>
       )}
     </View>

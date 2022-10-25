@@ -1,13 +1,14 @@
 import * as React from 'react';
-import { KeyboardTypeOptions, NativeSyntheticEvent, Text, TextInputFocusEventData, View, TouchableOpacity } from 'react-native';
-import { SvgXml } from 'react-native-svg';
-import { TailwindFn } from 'twrnc';
-import { Style } from 'twrnc/dist/esm/types';
+import {KeyboardTypeOptions, Text, View, TouchableOpacity} from 'react-native';
+import {SvgXml} from 'react-native-svg';
+import {TailwindFn} from 'twrnc';
+import {Style} from 'twrnc/dist/esm/types';
 import InputMask from '../masks/InputMask';
-import type { MaskInputProps } from '../masks/InputMask.types';
+import type {MaskInputProps} from '../masks/InputMask.types';
 import Formats from './formats';
 import ChevronIcon from './chevron-icon';
 import {Picker} from '@react-native-picker/picker';
+import {useState} from 'react';
 
 let to: ReturnType<typeof setTimeout>;
 
@@ -30,11 +31,11 @@ type Props = {
   errorStyle?: Style;
   icon?: string;
   keyboardType?: KeyboardTypeOptions;
-  onBlur?: (e: NativeSyntheticEvent<TextInputFocusEventData>) => void;
   required?: boolean;
   requiredStyle?: Style;
   defaultCountry?: 'US' | 'BR';
   placeholderTextColor?: string;
+  onFocusBorderColor?: Style;
 } & MaskInputProps;
 
 const InputPhone = ({
@@ -59,15 +60,17 @@ const InputPhone = ({
   showObfuscatedValue,
   placeholderFillCharacter,
   obfuscationCharacter,
-  onBlur,
   required = false,
   requiredStyle,
   defaultCountry = 'US',
   placeholderTextColor,
+  onFocusBorderColor,
 }: Props): JSX.Element => {
   const [selectedCountry, setSelectedCountry] = React.useState(defaultCountry);
   const [selectedMask, setSelectedMask] = React.useState<(string | RegExp)[]>();
   const [showPicker, setShowPicker] = React.useState(false);
+  const [onFocus, setOnFocus] = useState(false);
+  const [onBlur, setOnBlur] = useState(false);
 
   const defaultLabelStyle = tw.style('text-sm font-medium text-gray-700');
   const defaultInputStyle = tw.style(
@@ -91,32 +94,66 @@ const InputPhone = ({
 
   React.useEffect(() => {
     console.log('selectedCountry:', selectedCountry);
-    const obj = Formats.find((format) => format.code === selectedCountry);
+    const obj = Formats.find(format => format.code === selectedCountry);
     if (obj) {
       setSelectedMask(obj.mask);
     }
 
     console.log('Timeout started');
     to = setTimeout(() => {
-      console.log('Running timeout')
+      console.log('Running timeout');
       setShowPicker(false);
     }, 5000);
   }, [selectedCountry]);
 
+  const messageError = error ?? <Text>Required Field</Text>;
+
+  const changeColorBorderOnFocus = () => {
+    setOnBlur(false);
+    setOnFocus(true);
+  };
+
+  const changeColorBorderOnBlur = () => {
+    setOnFocus(false);
+    setOnBlur(true);
+  };
+
+  const onFocusBorderStyleColor = onFocus
+    ? onFocusBorderColor ?? tw`border-light-blue-700`
+    : tw``;
+  const onFocusColor = onFocus ? tw`text-light-blue-700` : tw``;
+  const onBlurBorderColor = onBlur && required ? tw`border-red-500` : tw``;
+  const onBlurColor = onBlur && required ? tw`text-red-500` : tw``;
+
   return (
     <View style={style}>
       {label && (
-          <View style={tw`flex-row`}>
-            <Text style={{...defaultLabelStyle, ...labelStyle}}>{label}</Text>
-            {required && (
-              <Text style={{...defaultRequiredStyle, ...requiredStyle}}>*</Text>
-            )}
-          </View>
+        <View style={tw`flex-row`}>
+          <Text style={{...defaultLabelStyle, ...labelStyle}}>{label}</Text>
+          {required && (
+            <Text
+              style={{
+                ...defaultRequiredStyle,
+                ...requiredStyle,
+                ...onBlurColor,
+                ...onFocusColor,
+              }}>
+              *
+            </Text>
+          )}
+        </View>
       )}
       <View>
         <InputMask
           tw={tw}
-          style={{...defaultInputStyle, ...typeInputStyle, ...inputStyle, ...tw`pb-4`}}
+          style={{
+            ...defaultInputStyle,
+            ...typeInputStyle,
+            ...inputStyle,
+            ...tw`pb-4`,
+            ...onFocusBorderStyleColor,
+            ...onBlurBorderColor,
+          }}
           onChangeText={onChangeText}
           value={value || undefined}
           placeholder={placeholder || undefined}
@@ -126,7 +163,8 @@ const InputPhone = ({
           showObfuscatedValue={showObfuscatedValue}
           placeholderFillCharacter={placeholderFillCharacter}
           obfuscationCharacter={obfuscationCharacter}
-          onBlur={onBlur}
+          onFocus={changeColorBorderOnFocus}
+          onBlur={changeColorBorderOnBlur}
           placeholderTextColor={placeholderTextColor}
         />
         {icon && (
@@ -136,8 +174,7 @@ const InputPhone = ({
         )}
         <TouchableOpacity
           style={tw`absolute top-0 left-0 h-full w-12 flex-col justify-center`}
-          onPress={() => setShowPicker(!showPicker)}
-        >
+          onPress={() => setShowPicker(!showPicker)}>
           <View style={tw`flex-row`}>
             <Text style={tw`ml-2 text-gray-500`}>{selectedCountry}</Text>
             <View style={tw`flex-col justify-center ml-1`}>
@@ -152,28 +189,29 @@ const InputPhone = ({
           {helper}
         </Text>
       )}
-      {error && (
-        <Text style={{...defaultErrorStyle, ...errorStyle}}>{error}</Text>
+      {onBlur && required && (
+        <Text style={{...defaultErrorStyle, ...errorStyle}}>
+          {messageError}
+        </Text>
       )}
       {showPicker && (
         <Picker
           selectedValue={selectedCountry}
-          onValueChange={(itemValue) => {
+          onValueChange={itemValue => {
             if (to) {
               clearTimeout(to);
             }
-            
-            setSelectedCountry(itemValue)
-          }
-        }>
-          {Formats.map((format) => {
+
+            setSelectedCountry(itemValue);
+          }}>
+          {Formats.map(format => {
             return (
               <Picker.Item
                 key={`${format.code}`}
                 label={`${format.code}`}
                 value={`${format.code}`}
               />
-            )
+            );
           })}
         </Picker>
       )}

@@ -24,8 +24,6 @@ export default React.forwardRef(function (
     ...rest
   } = props;
 
-  // const [isFocused, setFocused] = React.useState(false);
-
   const maskArray = React.useMemo(
     () => (typeof mask === 'function' ? mask(value) : mask),
     [mask, value],
@@ -102,7 +100,9 @@ export default React.forwardRef(function (
     ? formattedValueResult.obfuscated
     : formattedValueResult.masked;
 
-  const inputProcessedStyle = inputValue ? style : {...style, ...placeholderStyle};
+  const inputProcessedStyle = inputValue
+    ? style
+    : {...style, ...placeholderStyle};
 
   return (
     <TextInput
@@ -116,26 +116,11 @@ export default React.forwardRef(function (
       onChangeText={handleChangeText}
       placeholderTextColor={placeholderTextColor}
       ref={ref}
-      // onFocus={() => setFocused(true)}
-      // onBlur={() => setFocused(false)}
-      /* style={{
-        ...tw`text-gray-500 font-normal`,
-        ...style,
-      }} */
       style={{
         ...tw`text-gray-500 font-normal`,
         ...inputProcessedStyle,
       }}
-      placeholder={defaultPlaceholder} />
-      /* !isFocused && !inputValue && (
-        <Text
-          style={{
-            ...tw`text-gray-500 font-normal`,
-            ...placeholderStyle,
-          }}>
-          {defaultPlaceholder}
-        </Text>
-      )}
-      </TextInput> */
+      placeholder={defaultPlaceholder}
+    />
   );
 });

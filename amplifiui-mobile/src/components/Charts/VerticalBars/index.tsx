@@ -10,16 +10,11 @@ import Balloon, {BalloonData} from './Balloon';
 
 const defaultColorsArray = ['#34D399', '#38BDF8', '#A78BFA'];
 
-type Value = {
-  [key: string]: {amount: number; transactions: number};
-};
-
-type Values = {
-  [key: string]: Value;
-};
-
 export type Data = {
-  values: Values;
+  labels: string[][];
+  values: {
+    [key: string]: {amount: number; transactions: number};
+  }[];
 };
 
 type Props = {
@@ -34,7 +29,7 @@ type Props = {
   showLabels?: boolean;
   fontColor?: string;
   balloonData?: BalloonData;
-  setBalloonData?: (valueId?: string | undefined) => void;
+  setBalloonData: (valueId: number | undefined) => void;
   notSelectedColor?: string;
 };
 
@@ -58,7 +53,9 @@ const VerticalBars = ({
   const [barWidth, setBarWidth] = React.useState(0);
   const [scale, setScale] = React.useState(['0']);
   const [unitaryHeight, setUnitaryHeight] = React.useState(0);
-  const [selectedColumn, setSelectedColumn] = React.useState('');
+  const [selectedColumn, setSelectedColumn] = React.useState<
+    number | undefined
+  >();
   const [consumableColorsArray] = React.useState([...colorsArray].reverse());
 
   const defaultStyles = tw`flex-1 font-medium text-base text-gray-500 items-center`;
@@ -67,6 +64,7 @@ const VerticalBars = ({
   const spaceBetween = 10;
   const labelHeight = 24;
   const scaleWidth = 50;
+  const topSafetyMargin = 16;
 
   let dx = scaleWidth;
 
@@ -85,7 +83,7 @@ const VerticalBars = ({
   React.useEffect(() => {
     const ceilNumber = Math.ceil(scaleSize / 10) * 10;
     const head = parseInt(`${ceilNumber}`.substring(0, 1), 10);
-    const step = head <= 5 ? ceilNumber / head : (ceilNumber / 2) * head;
+    const step = ceilNumber / head;
 
     let suffix = '';
     let divisor = 1;
@@ -113,53 +111,66 @@ const VerticalBars = ({
   }, [height, scaleSize]);
 
   React.useEffect(() => {
-    if (selectedColumn && setBalloonData) {
+    if (typeof selectedColumn !== 'undefined' && setBalloonData) {
       setBalloonData(selectedColumn);
       clearTimeout(selectionTimeout);
 
       selectionTimeout = setTimeout(() => {
-        setSelectedColumn('');
-        setBalloonData();
+        setSelectedColumn(undefined);
+        setBalloonData(undefined);
       }, 5000);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedColumn]);
 
   return (
     <View style={{...defaultStyles, ...style}}>
       {/* Chart - Draws the SVG */}
       <View style={{...chartDefaultStyles}}>
-        <Svg width={width} height={height}>
+        <Svg
+          width={width}
+          height={height + data.labels[0].length * 16 + topSafetyMargin}>
           {scale.map((label, idx) => {
             return (
               <Text
                 key={idx}
                 x={0}
-                y={height - labelHeight - idx * (height / scale.length)}
+                y={
+                  height -
+                  labelHeight -
+                  idx * (height / scale.length) +
+                  topSafetyMargin
+                }
                 fontSize="12"
                 fill={fontColor}>
                 {`$${label}`}
               </Text>
             );
           })}
-          {Object.keys(data.values).map((key_, idx) => {
-            const record = data.values[key_];
+          {data.values.map((record, idx) => {
             dx = idx > 0 ? dx + (barWidth + spaceBetween) : dx;
 
             let sum = 0;
             const l = Object.keys(record);
             for (let i = 0; i < l.length; i += 1) {
-              sum += record[l[i]].amount;
+              sum += record[l[i]].amount as unknown as number;
             }
 
-            let dy = height - labelHeight - sum * unitaryHeight;
+            let dy =
+              height - labelHeight - sum * unitaryHeight + topSafetyMargin;
 
             return (
-              <G key={idx} onPress={() => setSelectedColumn(key_)}>
+              <G
+                key={idx}
+                onPress={() => {
+                  setSelectedColumn(idx);
+                }}>
                 {l.reverse().map((_, idx2: number) => {
                   const originalDy = dy;
-                  const barHeight = unitaryHeight * record[l[idx2]].amount;
+                  const barHeight =
+                    unitaryHeight *
+                    (record[l[idx2]].amount as unknown as number);
                   dy = dy + barHeight;
+
                   return (
                     <Rect
                       key={idx2}
@@ -168,22 +179,28 @@ const VerticalBars = ({
                       width={barWidth}
                       height={barHeight}
                       fill={
-                        !selectedColumn
+                        typeof selectedColumn === 'undefined'
                           ? consumableColorsArray[idx2]
-                          : selectedColumn === key_
+                          : selectedColumn === idx
                           ? consumableColorsArray[idx2]
                           : notSelectedColor
                       }
                     />
                   );
                 })}
-                <Text
-                  x={dx + barWidth / 2 - 8}
-                  y={height}
-                  fontSize="16"
-                  fill={fontColor}>
-                  {key_}
-                </Text>
+                {data.labels[idx].map((label, i) => {
+                  return (
+                    <Text
+                      key={i}
+                      x={dx + barWidth / 2}
+                      y={height + 18 * i + topSafetyMargin}
+                      fontSize="12"
+                      fill={fontColor}
+                      textAnchor="middle">
+                      {label}
+                    </Text>
+                  );
+                })}
               </G>
             );
           })}
@@ -191,7 +208,7 @@ const VerticalBars = ({
       </View>
       {showLabels && (
         <View style={tw`flex-row my-2 justify-between w-9/12 mt-4`}>
-          {Object.keys(data.values[Object.keys(data.values)[0]]).map(
+          {Object.keys(data.values[Object.keys(data.values)[0] as any]).map(
             (valueKey: string, idx: number) => {
               return (
                 <View key={idx} style={tw`flex-row items-center`}>
@@ -214,7 +231,7 @@ const VerticalBars = ({
           )}
         </View>
       )}
-      {!!selectedColumn && balloonData && (
+      {typeof selectedColumn !== 'undefined' && balloonData && (
         <Balloon
           tw={tw}
           balloonData={balloonData}

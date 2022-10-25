@@ -19,7 +19,7 @@ export default [
       /\d/,
       /\d/,
       /\d/,
-    ]
+    ],
   },
   {
     code: 'BR',
@@ -43,6 +43,6 @@ export default [
       /\d/,
       /\d/,
       /\d/,
-    ]
+    ],
   },
-]
+];

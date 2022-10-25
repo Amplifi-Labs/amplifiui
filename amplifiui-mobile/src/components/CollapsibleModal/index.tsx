@@ -24,8 +24,6 @@ type Props = {
     | React.Dispatch<React.SetStateAction<boolean>>
     | ((v: boolean) => void);
   style?: Style;
-  containerStyle?: Style;
-  opacityColor?: string;
 };
 
 let ref: Animated.LegacyRef<View>;
@@ -37,8 +35,6 @@ const DraggableView = ({
   show,
   setShow,
   style,
-  containerStyle,
-  opacityColor,
 }: Props): JSX.Element => {
   const insets = useSafeAreaInsets();
 
@@ -126,7 +122,7 @@ const DraggableView = ({
     <>
       {position !== 0 && (
         <View
-          style={tw`absolute left-0 right-0 bottom-0 bg-${opacityColor || 'gray-200'}/${opacity} top-[${
+          style={tw`absolute left-0 right-0 bottom-0 bg-gray-200/${opacity} top-[${
             insets.top / 4
           }]`}>
           <Animated.View
@@ -136,7 +132,6 @@ const DraggableView = ({
             style={{
               ...tw`absolute left-0 w-full rounded-t-2xl bg-white h-full shadow-2xl`,
               top: top,
-              ...containerStyle,
             }}
             {..._panGesture.panHandlers}>
             <View

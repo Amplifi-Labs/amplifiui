@@ -70,7 +70,7 @@ const ToastMessage = ({
   return (
     <Animated.View
       style={{
-        ...tw`absolute top-6 py-4 px-6 bg-gray-600 flex-row z-10 rounded-md w-full`,
+        ...tw`absolute top-6 py-4 px-4 bg-gray-600 flex-row z-10 rounded-md`,
         ...{opacity},
         ...style,
       }}>

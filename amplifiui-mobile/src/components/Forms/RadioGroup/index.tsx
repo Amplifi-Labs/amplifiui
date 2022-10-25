@@ -6,7 +6,7 @@ import {Style} from 'twrnc/dist/esm/types';
 type Props = {
   tw: TailwindFn;
   label?: string;
-  data: Array<{label: string; key: number}>;
+  data: Array<{label: string; key: string | number}>;
   showRadio?: Boolean;
   style?: Style;
   labelStyle?: Style;
@@ -14,7 +14,7 @@ type Props = {
   radioStyle?: Style;
   onChangeOption:
     | React.Dispatch<React.SetStateAction<Object>>
-    | ((obj: {key: number; label: string}) => void);
+    | ((obj: {key: string | number; label: string}) => void);
   value?: string | number;
   isHorizontal?: boolean;
   textStyle?: Style;
@@ -38,7 +38,7 @@ const RadioGroup = ({
 }: Props): JSX.Element => {
   const [selectedValue, setSelectedValue] = React.useState<{
     label: string;
-    key: number;
+    key: string | number;
   }>({
     label: '',
     key: 0,
@@ -62,11 +62,11 @@ const RadioGroup = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value]);
 
-  const isSelected = (item: {label: string; key: number}) => {
+  const isSelected = (item: {label: string; key: string | number}) => {
     return item.key === selectedValue.key;
   };
 
-  const updateValue = (newValue: {label: string; key: number}) => {
+  const updateValue = (newValue: {label: string; key: string | number}) => {
     setSelectedValue(newValue);
     onChangeOption(newValue);
   };
