@@ -66,6 +66,7 @@ const InputPhone = ({
   placeholderTextColor,
   onFocusBorderColor,
   onBlur,
+  ...rest
 }: Props): JSX.Element => {
   const [selectedCountry, setSelectedCountry] = React.useState(defaultCountry);
   const [selectedMask, setSelectedMask] = React.useState<(string | RegExp)[]>();
@@ -169,6 +170,7 @@ const InputPhone = ({
             }
           }}
           placeholderTextColor={placeholderTextColor}
+          {...rest}
         />
         {icon && (
           <View style={{...defaultIconStyle, ...iconStyle}}>

@@ -60,6 +60,7 @@ const InputNumber = ({
   placeholderTextColor,
   onFocusBorderColor,
   onBlur,
+  ...rest
 }: Props): JSX.Element => {
   const [onFocus, setOnFocus] = useState(false);
 
@@ -145,6 +146,7 @@ const InputNumber = ({
             }
           }}
           placeholderTextColor={placeholderTextColor}
+          {...rest}
         />
         {icon && (
           <View style={{...defaultIconStyle, ...iconStyle}}>
