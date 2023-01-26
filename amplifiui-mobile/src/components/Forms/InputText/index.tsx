@@ -66,6 +66,7 @@ const InputText = ({
   placeholderTextColor,
   onFocusBorderColor,
   onBlur,
+  ...rest
 }: Props): JSX.Element => {
   const [onFocus, setOnFocus] = useState(false);
 
@@ -154,6 +155,7 @@ const InputText = ({
           multiline={multiline}
           numberOfLines={numberOfLines}
           placeholderTextColor={placeholderTextColor}
+          {...rest}
         />
         {icon && (
           <View style={{...defaultIconStyle, ...iconStyle}}>
