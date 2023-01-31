@@ -1,6 +1,13 @@
 import * as React from 'react';
 import {useState} from 'react';
-import {Text, TextInput, View, TouchableOpacity, NativeSyntheticEvent, TextInputFocusEventData} from 'react-native';
+import {
+  Text,
+  TextInput,
+  View,
+  TouchableOpacity,
+  NativeSyntheticEvent,
+  TextInputFocusEventData,
+} from 'react-native';
 import {SvgXml} from 'react-native-svg';
 import {TailwindFn} from 'twrnc';
 import {Style} from 'twrnc/dist/esm/types';
@@ -114,6 +121,8 @@ const InputPassword: React.FC<Props> = ({
       )}
       <View>
         <TextInput
+          textContentType="password"
+          autoCapitalize="none"
           style={{
             ...defaultInputStyle,
             ...typeInputStyle,
@@ -140,7 +149,7 @@ const InputPassword: React.FC<Props> = ({
             }
           }}
           onFocus={changeColorBorderOnFocus}
-          onBlur={(e) => {
+          onBlur={e => {
             changeColorBorderOnBlur();
 
             if (onBlur) {
