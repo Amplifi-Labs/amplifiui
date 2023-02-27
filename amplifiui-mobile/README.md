@@ -49,6 +49,7 @@ If your project uses Amplifi UI, please, let us know! We would love :heart: to h
   - [ProgressSteps](#progresssteps)
   - [Spinner](#spinner)
   - [SwipeCarousel](#swipecarousel)
+  - [ToastMessage](#toastmessage)
 
 # Components
 
@@ -1034,6 +1035,101 @@ export default function App() {
 | opacity          | number                       | 0.3     | :x:                | Defines the opacity for the unselected indicators.                             |
 | radius           | number                       | 2       | :x:                | Defines the round radius of the indicators.                                    |
 | unselectedWidth  | number                       | 4       | :x:                | Defines the length of the unselected indicators.                               |
+## ToastMessage
+
+#### Description:
+This component allows you to add notifications to your app.
+
+#### Samples
+Try using Expo:
+https://snack.expo.dev/@jguilhermesl/amplifi-ui---mobile---card?platform=ios
+
+```
+import * as React from 'react';
+import { View, SafeAreaView } from 'react-native';
+import { ToastMessage, Button } from '@amplifiui/mobile';
+import tw from './services/tw';
+
+interface PropsToastState {
+  state: boolean;
+  label: string;
+  type: 'error' | 'success' | 'warning';
+}
+
+export default function App() {
+  const [toast, setToast] = React.useState<PropsToastState>({
+    state: true,
+    label: '',
+    type: 'success',
+  });
+
+  const handleToast = (
+    type: 'error' | 'success' | 'warning',
+    label: string
+  ) => {
+    setToast({
+      state: true,
+      label,
+      type,
+    });
+  };
+
+  return (
+    <SafeAreaView>
+      <View style={tw`mx-4`}>
+        <Button
+          onPress={() => handleToast('error', 'Error toast')}
+          tw={tw}
+          style={tw`mt-40`}
+          children="Handle Error Toast"
+        />
+        <Button
+          onPress={() => handleToast('success', 'Success toast')}
+          tw={tw}
+          style={tw`mt-4`}
+          children="Handle Success Toast"
+        />
+        <Button
+          onPress={() => handleToast('warning', 'Warning toast')}
+          tw={tw}
+          style={tw`mt-4`}
+          children="Handle Warning Toast"
+        />
+        <ToastMessage
+          duration={200}
+          timeout={2000}
+          tw={tw}
+          show={toast.state}
+          children={toast.label}
+          type={toast.type}
+          showCallback={(value: boolean) => setToast({
+            ...toast,
+            state: value
+          })}
+        />
+      </View>
+    </SafeAreaView>
+  );
+}
+```
+
+<img src="https://raw.githubusercontent.com/Amplifi-Labs/amplifiui/main/amplifiui-mobile/files/sample-toast-message.png" alt="Toast Message Sample Image" width=200  />
+
+#### Props
+| Variable         | Value Type                         | Default   | Mandatory          | Notes                                                                          |
+| ---------------- | ---------------------------------- | --------- | ------------------ | ------------------------------------------------------------------------------ |
+| tw               | Tailwind Function                  | \_        | :heavy_check_mark: | \_                                                                             |
+| style            | Tailwind Style                     | \_        | :x:                | This style is applied to the container View.                                   |
+| iconStyle        | Tailwind Style                     | \_        | :x:                | This style is applied to the icon View.                                        |
+| textStyle        | Tailwind Style                     | \_        | :x:                | This style is applied to the toast text.                                       |
+| children         | string                             | \_        | :heavy_check_mark: | \_                                                                             |
+| show             | boolean                            | \_        | :heavy_check_mark: | Defines whether the toast appears or not.                                      |
+| duration         | number                             | 1000      | :x:                | Defines the duration that the toast takes to appear.                           |
+| showCallback     | (value: boolean) => void           | \_        | :x:                | Function that will perform the callback to make the notification temporary.                                                                             |
+| timeout          | number                             | 4000      | :x:                | Defines the duration of the toast                                              |
+| icon             | SVG string                         | \_        | :x:                | Defines the icon of the toast.                                                 |
+| type             | 'success' \| 'warning' \| 'error'  | 'success' | :x:                | Defines the type of the toast.                                                 |
+| iconSize         | number                             | \_        | :x:                | Defines the size of the icon.                                                  |
 
 ## Spinner
 
@@ -1050,6 +1146,9 @@ export default function App() {
 #### Samples
 
 #### Props
+
+
+
 
 ### Amplifi Labs
 
