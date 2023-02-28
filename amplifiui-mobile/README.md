@@ -934,10 +934,41 @@ export default function App() {
 ## LoadingRound
 
 #### Description:
+This component can be used to show the loading state.
 
 #### Samples
+Try using Expo:
+[https://aa](https://snack.expo.dev/@jguilhermesl/amplifi-ui---mobile---loadinground?platform=ios)
+
+```
+import { SvgXml } from "react-native-svg"
+import { View, SafeAreaView } from 'react-native';
+import { LoadingRound } from '@amplifiui/mobile';
+import tw from './services/tw';
+
+import Icon from "./icon/index"
+
+export default function App() {
+  return (
+    <SafeAreaView>
+      <View style={tw`mt-10 mx-4`}>
+        <LoadingRound tw={tw} children={<SvgXml xml={Icon} width={20} height={20} />} />
+        <LoadingRound tw={tw} style={tw`bg-red-300 mt-10`} children={<SvgXml xml={Icon} width={20} height={20} />} />
+      </View>
+    </SafeAreaView>
+  );
+}
+```
+
+<img src="https://raw.githubusercontent.com/Amplifi-Labs/amplifiui/main/amplifiui-mobile/files/sample-loading-round.png" alt="Loading Round Sample Image" width=200  />
 
 #### Props
+| Variable         | Value Type                   | Default | Mandatory                                      | Notes                                                                          |
+| ---------------- | ---------------------------- | ------- | ------------------                             | ------------------------------------------------------------------------------ |
+| tw               | Tailwind Function            | \_      | :heavy_check_mark:                             | \_                                                                             |
+| style            | Tailwind Style               | \_      | :x:                                            | This style is applied to the container View.                                   |
+| children         | JSX.Element \| JSX.Element[] | \_      | :heavy_check_mark:                             | Component that will be rendered and will remain rotating.                      |
+| time             | number                       | 3000    | :x:                                            | Duration of one spinner turn.                                                  |
 
 ## ProgressSteps
 
