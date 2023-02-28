@@ -1042,7 +1042,7 @@ This component allows you to add notifications to your app.
 
 #### Samples
 Try using Expo:
-https://snack.expo.dev/@jguilhermesl/amplifi-ui---mobile---card?platform=ios
+https://snack.expo.dev/@jguilhermesl/amplifi-ui---mobile---toastmessage?platform=ios
 
 ```
 import * as React from 'react';
