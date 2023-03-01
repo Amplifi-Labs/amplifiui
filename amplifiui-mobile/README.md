@@ -41,7 +41,7 @@ If your project uses Amplifi UI, please, let us know! We would love :heart: to h
     - [InputPassword](#inputpassword)
     - [InputText](#inputtext)
     - [Checkbox](#checkbox)
-    - [Radio](#radio)
+    - [ToggleButton](#togglebutton)
   - [Typography](#typography)
   - [HR](#hr)
   - [Image](#image)
