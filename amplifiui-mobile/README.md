@@ -49,6 +49,7 @@ If your project uses Amplifi UI, please, let us know! We would love :heart: to h
   - [ProgressSteps](#progresssteps)
   - [Spinner](#spinner)
   - [SwipeCarousel](#swipecarousel)
+  - [ToastMessage](#toastmessage)
 
 # Components
 
@@ -729,13 +730,89 @@ export default function App() {
 | iconWidth        | number                       | \_      | :x:                | To define a custom width to the icon.                                          |
 | iconHeight       | number                       | \_      | :x:                | To define a custom height to the icon.                                         |
 
-### Radio
+### ToggleButton
 
 #### Description:
+This component renders a toggle switch element to be used on forms.
 
 #### Samples
+Try using Expo:
+https://snack.expo.dev/@jguilhermesl/amplifi-ui---mobile---togglebutton?platform=ios
+
+```
+import * as React from 'react';
+import { SafeAreaView, ScrollView } from 'react-native';
+import { ToggleButton } from '@amplifiui/mobile';
+
+import tw from './services/tw';
+
+export default function App() {
+  const [state, setState] = React.useState(false);
+
+  return (
+    <SafeAreaView>
+      <ScrollView style={tw`p-2 mt-4 h-full flex flex-col bg-gray-300 py-4`}>
+        <ToggleButton
+          label="Default toggle button"
+          style={tw`mt-4`}
+          tw={tw}
+          value={state}
+          onToggle={() => setState(!state)}
+        />
+        <ToggleButton
+          widthView={80}
+          label="Toggle button with different size"
+          labelStyle={tw`mt-4`}
+          style={tw`mt-4 w-20 h-10`}
+          innerStyle={tw`w-10 h-10`}
+          tw={tw}
+          value={state}
+          onToggle={() => setState(!state)}
+        />
+        <ToggleButton
+          widthView={80}
+          onColor="#442321"
+          offColor="#212121"
+          label="Toggle button with different background colors"
+          labelStyle={tw`mt-4`}
+          style={tw`mt-4 w-20 h-10`}
+          innerStyle={tw`w-10 h-10`}
+          tw={tw}
+          value={state}
+          onToggle={() => setState(!state)}
+        />
+        <ToggleButton
+          widthView={80}
+          label="Toggle button with different inner style"
+          labelStyle={tw`mt-4`}
+          style={tw`mt-4 w-20 h-10`}
+          innerStyle={tw`w-12 h-12 bg-red-300`}
+          tw={tw}
+          value={state}
+          onToggle={() => setState(!state)}
+        />
+      </ScrollView>
+    </SafeAreaView>
+  );
+}
+
+```
+<img src="https://raw.githubusercontent.com/Amplifi-Labs/amplifiui/main/amplifiui-mobile/files/sample-toggle-button.png" alt="Toggle Button Sample Image" width=200  />
 
 #### Props
+| Variable         | Value Type                   | Default | Mandatory          | Notes                                                                          |
+| ---------------- | ---------------------------- | ------- | ------------------ | ------------------------------------------------------------------------------ |
+| tw               | Tailwind Function            | \_      | :heavy_check_mark: | \_                                                                             |
+| onColor          | string                       | #0369A1 | :x:                | Background color when toggle is on.                                            |
+| offColor         | string                       | #ecf0f1 | :x:                | Background color when toggle is off.                                           |
+| label            | string                       | \_      | :x:                | Text that is shown beside the toggle button.                                   |
+| style            | Tailwind Style               | `tw`\`w-8.5 h-4.5 ml-1 rounded-25 justify-center`      | :x:                | This style is applied to the container View                                    |
+| value            | boolean                      | \_      | :heavy_check_mark: | Toggle button value, this property defines if the button is active or not.     |
+| labelStyle       | string                       | \_     | :x:                | This style is applied to the label.                                            |
+| innerStyle       | string                       | `tw`\`w-4 h-4 bg-white rounded-25 shadow-black shadow`      | :x:                | This style is applied to the inner View.                                       |
+| onToggle         | string                       | \_      | :heavy_check_mark: | Function that must be called when the toggle is clicked.                       |
+| widthView        | string                       | \_      | This prop is mandatory when the width of the View container is changed.| Width in px of the container view | 
+
 
 ## Typography
 
@@ -933,10 +1010,41 @@ export default function App() {
 ## LoadingRound
 
 #### Description:
+This component can be used to show the loading state.
 
 #### Samples
+Try using Expo:
+[https://aa](https://snack.expo.dev/@jguilhermesl/amplifi-ui---mobile---loadinground?platform=ios)
+
+```
+import { SvgXml } from "react-native-svg"
+import { View, SafeAreaView } from 'react-native';
+import { LoadingRound } from '@amplifiui/mobile';
+import tw from './services/tw';
+
+import Icon from "./icon/index"
+
+export default function App() {
+  return (
+    <SafeAreaView>
+      <View style={tw`mt-10 mx-4`}>
+        <LoadingRound tw={tw} children={<SvgXml xml={Icon} width={20} height={20} />} />
+        <LoadingRound tw={tw} style={tw`bg-red-300 mt-10`} children={<SvgXml xml={Icon} width={20} height={20} />} />
+      </View>
+    </SafeAreaView>
+  );
+}
+```
+
+<img src="https://raw.githubusercontent.com/Amplifi-Labs/amplifiui/main/amplifiui-mobile/files/sample-loading-round.png" alt="Loading Round Sample Image" width=200  />
 
 #### Props
+| Variable         | Value Type                   | Default | Mandatory                                      | Notes                                                                          |
+| ---------------- | ---------------------------- | ------- | ------------------                             | ------------------------------------------------------------------------------ |
+| tw               | Tailwind Function            | \_      | :heavy_check_mark:                             | \_                                                                             |
+| style            | Tailwind Style               | \_      | :x:                                            | This style is applied to the container View.                                   |
+| children         | JSX.Element \| JSX.Element[] | \_      | :heavy_check_mark:                             | Component that will be rendered and will remain rotating.                      |
+| time             | number                       | 3000    | :x:                                            | Duration of one spinner turn.                                                  |
 
 ## ProgressSteps
 
@@ -1034,22 +1142,101 @@ export default function App() {
 | opacity          | number                       | 0.3     | :x:                | Defines the opacity for the unselected indicators.                             |
 | radius           | number                       | 2       | :x:                | Defines the round radius of the indicators.                                    |
 | unselectedWidth  | number                       | 4       | :x:                | Defines the length of the unselected indicators.                               |
-
-## Spinner
-
-#### Description:
-
-#### Samples
-
-#### Props
-
-## SwipeCarousel
+## ToastMessage
 
 #### Description:
+This component allows you to add notifications to your app.
 
 #### Samples
+Try using Expo:
+https://snack.expo.dev/@jguilhermesl/amplifi-ui---mobile---toastmessage?platform=ios
+
+```
+import * as React from 'react';
+import { View, SafeAreaView } from 'react-native';
+import { ToastMessage, Button } from '@amplifiui/mobile';
+import tw from './services/tw';
+
+interface PropsToastState {
+  state: boolean;
+  label: string;
+  type: 'error' | 'success' | 'warning';
+}
+
+export default function App() {
+  const [toast, setToast] = React.useState<PropsToastState>({
+    state: true,
+    label: '',
+    type: 'success',
+  });
+
+  const handleToast = (
+    type: 'error' | 'success' | 'warning',
+    label: string
+  ) => {
+    setToast({
+      state: true,
+      label,
+      type,
+    });
+  };
+
+  return (
+    <SafeAreaView>
+      <View style={tw`mx-4`}>
+        <Button
+          onPress={() => handleToast('error', 'Error toast')}
+          tw={tw}
+          style={tw`mt-40`}
+          children="Handle Error Toast"
+        />
+        <Button
+          onPress={() => handleToast('success', 'Success toast')}
+          tw={tw}
+          style={tw`mt-4`}
+          children="Handle Success Toast"
+        />
+        <Button
+          onPress={() => handleToast('warning', 'Warning toast')}
+          tw={tw}
+          style={tw`mt-4`}
+          children="Handle Warning Toast"
+        />
+        <ToastMessage
+          duration={200}
+          timeout={2000}
+          tw={tw}
+          show={toast.state}
+          children={toast.label}
+          type={toast.type}
+          showCallback={(value: boolean) => setToast({
+            ...toast,
+            state: value
+          })}
+        />
+      </View>
+    </SafeAreaView>
+  );
+}
+```
+
+<img src="https://raw.githubusercontent.com/Amplifi-Labs/amplifiui/main/amplifiui-mobile/files/sample-toast-message.png" alt="Toast Message Sample Image" width=200  />
 
 #### Props
+| Variable         | Value Type                         | Default   | Mandatory          | Notes                                                                          |
+| ---------------- | ---------------------------------- | --------- | ------------------ | ------------------------------------------------------------------------------ |
+| tw               | Tailwind Function                  | \_        | :heavy_check_mark: | \_                                                                             |
+| style            | Tailwind Style                     | \_        | :x:                | This style is applied to the container View.                                   |
+| iconStyle        | Tailwind Style                     | \_        | :x:                | This style is applied to the icon View.                                        |
+| textStyle        | Tailwind Style                     | \_        | :x:                | This style is applied to the toast text.                                       |
+| children         | string                             | \_        | :heavy_check_mark: | \_                                                                             |
+| show             | boolean                            | \_        | :heavy_check_mark: | Defines whether the toast appears or not.                                      |
+| duration         | number                             | 1000      | :x:                | Defines the duration that the toast takes to appear.                           |
+| showCallback     | (value: boolean) => void           | \_        | :x:                | Function that will perform the callback to make the notification temporary.                                                                             |
+| timeout          | number                             | 4000      | :x:                | Defines the duration of the toast                                              |
+| icon             | SVG string                         | \_        | :x:                | Defines the icon of the toast.                                                 |
+| type             | 'success' \| 'warning' \| 'error'  | 'success' | :x:                | Defines the type of the toast.                                                 |
+| iconSize         | number                             | \_        | :x:                | Defines the size of the icon.                                                  |
 
 ### Amplifi Labs
 
