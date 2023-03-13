@@ -43,6 +43,7 @@ If your project uses Amplifi UI, please, let us know! We would love :heart: to h
     - [InputNumber](#inputnumber)
     - [InputPassword](#inputpassword)
     - [InputText](#inputtext)
+    - [InputPhone](#inputphone)
     - [ToggleButton](#togglebutton)
   - [Typography](#typography)
   - [HR](#hr)
@@ -658,6 +659,61 @@ export default function App() {
 | error            | string                       | \_      | :x:                | Replaces the helper text (same position). Used to return errors from the API   |
 | errorStyle       | Tailwind Style               | \_      | :x:                | This style is applied specifically to the error text.                          |
 | keyboardType     | RN KeyboardTypeOptions       | \_      | :x:                | Defines the type of keyboards that will be presented to the user.              |
+| onBlur           | NativeSyntheticEvent         | \_      | :x:                | Detects when the user leaves the input field. Used in combination with Formik. |
+### InputPhone
+
+#### Description:
+This component is a subset of the InputText created specifically to process phones.
+
+#### Samples
+Try using Expo:
+https://snack.expo.dev/@jguilhermesl/amplifi-ui---forms--input-phone?platform=ios
+
+```
+import * as React from 'react';
+import { View } from 'react-native';
+import { InputPhone } from '@amplifiui/mobile';
+import tw from './services/tw';
+
+export default function App() {
+  const [phone, setPhone] = React.useState('');
+
+  return (
+    <View style={tw`m-4`}>
+        <InputPhone
+          tw={tw}
+          onChangeText={(e: string) => setPhone(e)}
+          value={phone}
+          defaultCountry="US"
+        />
+    </View>
+  );
+}
+```
+
+<img src="https://raw.githubusercontent.com/Amplifi-Labs/amplifiui/main/amplifiui-mobile/files/sample-input-phone.png" alt="Input Phone Sample Image" width=200  />
+
+#### Props
+| Variable         | Value Type                   | Default | Mandatory          | Notes                                                                          |
+| ---------------- | ---------------------------- | ------- | ------------------ | ------------------------------------------------------------------------------ |
+| tw               | Tailwind Function            | \_      | :heavy_check_mark: | \_                                                                             |
+| inputStyle       | Tailwind Style               | \_      | :x:                | This style is applied specifically to the input.                               |
+| style            | Tailwind Style               | \_      | :x:                | This style is applied to the container View                                    |
+| label            | string                       | \_      | :x:                | Text that goes over the input field.                                           |
+| labelStyle       | Tailwind Style               | \_      | :x:                | This style is applied specifically to the label.                               |
+| placeholder      | string                       | \_      | :x:                | Text that goes inside the input field if value is empty.                       |
+| icon             | Valid SVG string             | \_      | :x:                | This is an optional icon that can be displayed by the end of the input.        |
+| iconStyle        | Tailwind Style               | \_      | :x:                | This style is applied specifically to the icon.                                |
+| onChangeText     | (value: string) => void      | \_      | :heavy_check_mark: | Callback when the text changes.                                                |
+| value            | string                       | \_      | :heavy_check_mark: | Value for the input field.                                                     |
+| inputType        | 'primary' \| 'secondary'     | \_      | :x:                | If selected, the project primary or secondary colors will be applied.          |
+| helper           | string                       | \_      | :x:                | Text that goes under the input field.                                          |
+| helperStyle      | Tailwind Style               | \_      | :x:                | This style is applied specifically to the helper text.                         |
+| helperType       | 'primary' \| 'secondary'     | \_      | :x:                | Shows the helper text with primary or secondary colors.                        |
+| error            | string                       | \_      | :x:                | Replaces the helper text (same position). Used to return errors from the API   |
+| errorStyle       | Tailwind Style               | \_      | :x:                | This style is applied specifically to the error text.                          |
+| keyboardType     | RN KeyboardTypeOptions       | \_      | :x:                | Defines the type of keyboards that will be presented to the user.              |
+| defaultCountry   | string                       | US      | :x:                | Defines the type of country that will start in the input.                      |
 | onBlur           | NativeSyntheticEvent         | \_      | :x:                | Detects when the user leaves the input field. Used in combination with Formik. |
 
 ### Checkbox
