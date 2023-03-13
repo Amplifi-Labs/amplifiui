@@ -51,6 +51,7 @@ If your project uses Amplifi UI, please, let us know! We would love :heart: to h
   - [LoadingRound](#loadinground)
   - [ProgressSteps](#progresssteps)
   - [ToastMessage](#toastmessage)
+  - [SwipeCarousel](#swipecarousel)
 
 # Components
 
@@ -1293,6 +1294,79 @@ export default function App() {
 | icon             | SVG string                         | \_        | :x:                | Defines the icon of the toast.                                                 |
 | type             | 'success' \| 'warning' \| 'error'  | 'success' | :x:                | Defines the type of the toast.                                                 |
 | iconSize         | number                             | \_        | :x:                | Defines the size of the icon.                                                  |
+## SwipeCarousel
+
+#### Description:
+This component adds a swipe carousel to your app.
+
+#### Samples
+Try using Expo:
+https://snack.expo.dev/@jguilhermesl/amplifi-ui---swipe-carousel-?platform=ios
+
+```
+import * as React from 'react';
+import { SafeAreaView, Text, View } from 'react-native';
+import {SwipeCarousel} from "@amplifiui/mobile"
+import tw from './services/tw';
+
+const ITEMS = [
+  {
+    id: 0,
+    title: 'Slide 1',
+    background: "#800011",
+  },
+  {
+    id: 1,
+    title: 'Slide 2',
+    background: "#208011",
+  },
+  {
+    id: 2,
+    title: 'Slide 3',
+    background: "#100091",
+  },
+  {
+    id: 3,
+    title: 'Slide 4',
+    background: "#105051",
+  },
+]
+
+export default function App() {
+  const [selectedSlide, setSelectedSlide] = React.useState(0)
+
+  return (
+    <SafeAreaView>
+      <SwipeCarousel tw={tw}
+        duration={500}
+        selected={selectedSlide}
+        selectedColor="#001199"
+        selectedCallback={(value: number) => setSelectedSlide(value)}>
+        {ITEMS.map((item) => (
+          <View key={item.id} style={tw`w-full h-50 bg-[${item.background}] items-center justify-center`}>
+            <Text style={tw`text-white font-bold text-base`}>{item.title}</Text>
+          </View>
+        ))}
+      </SwipeCarousel>
+    </SafeAreaView>
+  );
+}
+```
+
+<img src="https://raw.githubusercontent.com/Amplifi-Labs/amplifiui/main/amplifiui-mobile/files/sample-swipe-carousel.png" alt="Swipe Carousel Sample Image" width=200  />
+
+#### Props
+| Variable         | Value Type                         | Default   | Mandatory          | Notes                                                                          |
+| ---------------- | ---------------------------------- | --------- | ------------------ | ------------------------------------------------------------------------------ |
+| tw               | Tailwind Function                  | \_        | :heavy_check_mark: | \_                                                                             |
+| style            | Tailwind Style                     | \_        | :x:                | This style is applied to the container View.                                   |
+| children         | JSX.Element[]                      | \_        | :heavy_check_mark: | Carousel items.                                                                |
+| showProgress     | boolean                            | true      | :x:                | Define se o progresso do slide aparece ou não.                                 |
+| selected         | number                             | \_        | :heavy_check_mark: | This variable is the currently selected slide.                                 |
+| selectedColor    | string                             | "#C2410C" | :x:                | Progress circle color when selected.                                           |
+| unselectedColor  | string                             | "#9CA3AF" | :x:                | Progress circle color when selected.                                           |
+| selectedCallback | (key: number) => void              | \_        | :x:                | Callback to select the slide.                                                  |                                  
+| duration         | number                             | 1000      | :x:                | Defines the animation duration that the carousel slide change the slide.       |
 ### Amplifi Labs
 
 This library is being developed by Amplifi Labs. To know more about our company, please, access our [website](https://www.amplifilabs.com).
