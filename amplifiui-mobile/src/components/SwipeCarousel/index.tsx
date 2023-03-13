@@ -7,7 +7,7 @@ import {
   PanResponder,
   PanResponderGestureState,
 } from 'react-native';
-import {Style, TailwindFn} from 'twrnc/dist/esm/types';
+import { Style, TailwindFn } from 'twrnc/dist/esm/types';
 import Circle from './icon/circle';
 
 type Props = {
@@ -19,11 +19,10 @@ type Props = {
   selectedColor?: string;
   unselectedColor?: string;
   selectedCallback?: (key: number) => void;
+  duration?: number;
 };
 
 let ref: Animated.LegacyRef<View>;
-
-const duration = 1000;
 
 const SwipeCarousel = ({
   tw,
@@ -34,6 +33,7 @@ const SwipeCarousel = ({
   selectedColor = '#C2410C',
   unselectedColor = '#9CA3AF',
   selectedCallback,
+  duration = 1000
 }: Props) => {
   const [position, setPosition] = React.useState(0);
 
@@ -150,14 +150,13 @@ const SwipeCarousel = ({
   });
 
   return (
-    <View style={{...tw`overflow-hidden w-full`, ...style}} onLayout={onLayout}>
+    <View style={{ ...tw`overflow-hidden w-full`, ...style }} onLayout={onLayout}>
       <Animated.View
         ref={(ref_: Animated.LegacyRef<View>) => {
           ref = ref_;
         }}
-        style={tw`flex-row relative w-[${
-          layout ? layout.width : 0
-        }px] right-[${position}px]`}
+        style={tw`flex-row relative w-[${layout ? layout.width : 0
+          }px] right-[${position}px]`}
         {..._panGesture.panHandlers}>
         {children}
       </Animated.View>
