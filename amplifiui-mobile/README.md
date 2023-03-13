@@ -1363,9 +1363,9 @@ export default function App() {
 | children         | JSX.Element[]                      | \_        | :heavy_check_mark: | Carousel items.                                                                |
 | showProgress     | boolean                            | true      | :x:                | Define se o progresso do slide aparece ou não.                                 |
 | selected         | number                             | \_        | :heavy_check_mark: | This variable is the currently selected slide.                                 |
-| selectedColor    | string                             | "#C2410C" | :x:                | Progress circle color when selected.                                           |
-| unselectedColor  | string                             | "#9CA3AF" | :x:                | Progress circle color when selected.                                           |
-| selectedCallback | (key: number) => void              | \_        | :x:                | Callback to select the slide.                                                  |                                  
+| selectedColor    | string                             | #C2410C | :x:                | Progress circle color when selected.                                           |
+| unselectedColor  | string                             | #9CA3AF | :x:                | Progress circle color when selected.                                           |
+| selectedCallback | (key: number) => void              | \_        | :x:                | Callback to select the slide.                                                  |
 | duration         | number                             | 1000      | :x:                | Defines the animation duration that the carousel slide change the slide.       |
 ### Amplifi Labs
 
