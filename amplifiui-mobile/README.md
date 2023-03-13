@@ -27,6 +27,8 @@ If your project uses Amplifi UI, please, let us know! We would love :heart: to h
   - [react-native-svg](https://www.npmjs.com/package/react-native-svg);
   - [twrnc](https://www.npmjs.com/package/twrnc),
   - [react-native-safe-area-context](https://www.npmjs.com/package/react-native-safe-area-context);
+  - [react-native-linear-gradient](https://www.npmjs.com/package/react-native-linear-gradient);
+  - [react-native-picker](https://www.npmjs.com/package/@react-native-picker/picker);
 
 # Table of Contents
 
@@ -37,10 +39,10 @@ If your project uses Amplifi UI, please, let us know! We would love :heart: to h
     - [VerticalBars](#verticalbars)
   - [CollapsibleModal](#collapsiblemodal)
   - [Forms](#forms)
+    - [Checkbox](#checkbox)
     - [InputNumber](#inputnumber)
     - [InputPassword](#inputpassword)
     - [InputText](#inputtext)
-    - [Checkbox](#checkbox)
     - [ToggleButton](#togglebutton)
   - [Typography](#typography)
   - [HR](#hr)
