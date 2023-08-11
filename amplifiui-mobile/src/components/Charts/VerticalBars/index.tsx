@@ -122,6 +122,20 @@ const VerticalBars = ({
     }
   }, [selectedColumn]);
 
+  const TouchableRect = ({x, y, width, height}) => {
+    const hitSlop = 10; // Adjust this value as needed
+
+    return (
+      <Rect
+        x={x - hitSlop}
+        y={y - hitSlop}
+        width={width + hitSlop * 2}
+        height={height + hitSlop * 2}
+        fill="transparent"
+      />
+    );
+  };
+
   return (
     <View style={{...defaultStyles, ...style}}>
       {/* Chart - Draws the SVG */}
@@ -159,49 +173,57 @@ const VerticalBars = ({
               height - labelHeight - sum * unitaryHeight + topSafetyMargin;
 
             return (
-              <G
-                key={idx}
-                onPress={() => {
-                  setSelectedColumn(idx);
-                }}>
-                {l.reverse().map((_, idx2: number) => {
-                  const originalDy = dy;
-                  const barHeight =
-                    unitaryHeight *
-                    (record[l[idx2]].amount as unknown as number);
-                  dy = dy + barHeight;
+<G
+                  key={idx}
+                  onPress={() => {
+                    setSelectedColumn(idx);
+                  }}>
+                  {l.reverse().map((_, idx2: number) => {
+                    const originalDy = dy;
+                    const barHeight =
+                      unitaryHeight *
+                      (record[l[idx2]].amount as unknown as number);
+                    dy = dy + barHeight;
 
-                  return (
-                    <Rect
-                      key={idx2}
-                      x={dx}
-                      y={originalDy}
-                      width={barWidth}
-                      height={barHeight}
-                      fill={
-                        typeof selectedColumn === 'undefined'
-                          ? consumableColorsArray[idx2]
-                          : selectedColumn === idx
-                          ? consumableColorsArray[idx2]
-                          : notSelectedColor
-                      }
-                    />
-                  );
-                })}
-                {data.labels[idx].map((label, i) => {
-                  return (
+                    return (
+                      <G key={idx2}>
+                        <TouchableRect
+                          x={dx}
+                          y={originalDy}
+                          width={barWidth}
+                          height={barHeight}
+                        />
+                        <Rect
+                          x={dx}
+                          y={originalDy}
+                          width={barWidth}
+                          height={barHeight}
+                          fill={
+                            typeof selectedColumn === 'undefined'
+                              ? consumableColorsArray[idx2]
+                              : selectedColumn === idx
+                              ? consumableColorsArray[idx2]
+                              : notSelectedColor
+                          }
+                        />
+                      </G>
+                    );
+                  })}
+                  {data.labels[idx].map((label, i) => (
                     <Text
                       key={i}
                       x={dx + barWidth / 2}
                       y={height + 18 * i + topSafetyMargin}
                       fontSize="12"
+                      onPress={() => {
+                        setSelectedColumn(idx);
+                      }}
                       fill={fontColor}
                       textAnchor="middle">
                       {label}
                     </Text>
-                  );
-                })}
-              </G>
+                  ))}
+                </G>
             );
           })}
         </Svg>
