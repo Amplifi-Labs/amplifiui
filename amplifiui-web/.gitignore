@@ -1,0 +1,62 @@
+# Node modules
+node_modules/
+amplifiui-mobile/node_modules/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+jspm_packages/
+
+*.tsbuildinfo
+
+dist/
+build/
+lib/
+
+public/static/
+
+yarn.lock
+amplifiui-mobile/yarn.lock
+
+package-lock.json
+amplifiui-mobile/package-lock.json
+
+.cache/
+.npm/
+.eslintcache
+
+tmp/
+temp/
+
+.DS_Store
+
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# ESLint
+.eslintcache
+
+# Prettier
+.prettiercache
+
+# Tailwind JIT
+tailwind.config.js
+
+coverage/
+
+# Misc
+*.log
+*.gz
+
+*.tgz
+
+.npm/
