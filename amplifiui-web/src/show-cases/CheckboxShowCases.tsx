@@ -4,11 +4,9 @@ import Checkbox from '../components/checkbox/Checkbox';
 const CheckboxShowcase: React.FC = () => {
   const [checkedDefault, setCheckedDefault] = useState(false);
   const [checkedBordered, setCheckedBordered] = useState(false);
-  const [checkedCustom, setCheckedCustom] = useState(true);
 
   const handleDefaultChange = () => setCheckedDefault(!checkedDefault);
   const handleBorderedChange = () => setCheckedBordered(!checkedBordered);
-  const handleCustomChange = () => setCheckedCustom(!checkedCustom);
 
   return (
     <div className="space-y-4">
@@ -58,19 +56,6 @@ const CheckboxShowcase: React.FC = () => {
         description="This checked checkbox is disabled."
         disabled
         checked={true}
-        className="w-[460px]"
-      />
-
-      {/* Custom Checkbox */}
-      <Checkbox
-        label="Custom Checkbox"
-        description="This checkbox has a custom style."
-        variant="bordered"
-        checked={checkedCustom}
-        onChange={handleCustomChange}
-        checkboxStyle="bg-gray-700"
-        labelStyle="text-gray-700 font-bold"
-        descriptionStyle="text-gray-500"
         className="w-[460px]"
       />
     </div>
