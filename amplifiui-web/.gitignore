@@ -48,9 +48,6 @@ temp/
 # Prettier
 .prettiercache
 
-# Tailwind JIT
-tailwind.config.js
-
 coverage/
 
 # Misc
